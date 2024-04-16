@@ -2,7 +2,7 @@
 
 ## Concept
 
-In the game, players control a character moving within an arena, facing continuous waves of enemies. As players defeat enemies, they earn experience points to upgrade their character's stats, being able to choose between offense, defense, or special abilities. As the game progresses, enemies become stronger and more numerous, challenging players to survive as long as possible.
+The game is a top-down shooter, where players control a character moving within an arena, facing continuous waves of enemies. As players defeat enemies, they earn experience points to upgrade their character's stats, being able to choose between offense, defense, or special abilities. As the game progresses, enemies become stronger and more numerous, challenging players to survive as long as possible.
 
 ## Goal
 
