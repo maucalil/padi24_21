@@ -24,4 +24,3 @@ The goal of the game is to survive for as long as possible against increasing wa
 - Complex animations
 - Physics simulation
 - Random events
-- Character classes
