@@ -13,17 +13,31 @@ void Game::initWindow()
   window->setFramerateLimit(60);
 }
 
+void Game::initStates()
+{
+  states.push(new GameState(window));
+}
+
 // Constructor
 Game::Game()
 {
   initVariables();
   initWindow();
+  initStates();
 }
 
 // Destructor
 Game::~Game()
 {
   delete window;
+
+  while (!states.empty())
+  {
+    delete states.top();
+    states.pop();
+  }
+  
+  std::cout << "Game ended!\n";
 }
 
 void Game::updateEvents()
@@ -35,10 +49,6 @@ void Game::updateEvents()
     case sf::Event::Closed:
       window->close();
       break;
-    case sf::Event::KeyPressed:
-      if (event.key.code == sf::Keyboard::Escape)
-        window->close();
-      break;
     }
   }
 }
@@ -48,6 +58,17 @@ void Game::update()
 {
   updateEvents();
   player.update(window);
+
+  if(!states.empty()) {
+    states.top()->update(dt);
+
+    if (states.top()->getQuit()) {
+      delete states.top();
+      states.pop();
+    }
+  } else {
+    window->close();
+  }
 }
 
 void Game::render()
@@ -55,6 +76,9 @@ void Game::render()
   window->clear(sf::Color::Black);
 
   player.render(window);
+
+  if(!states.empty())
+    states.top()->render(window);
 
   window->display();
 }

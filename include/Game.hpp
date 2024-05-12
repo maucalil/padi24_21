@@ -1,9 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-
+#include "GameState.hpp"
 #include "Player.hpp"
 /*
   Wrapper class
@@ -20,11 +18,14 @@ private:
   sf::Clock dtClock;
   float dt;
 
+  std::stack<State*> states;
+
   Player player;
 
   // Methods
   void initVariables();
   void initWindow();
+  void initStates();
 
 public:
   Game();
