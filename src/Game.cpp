@@ -63,3 +63,12 @@ void Game::render()
 
   window->display();
 }
+
+void Game::run()
+{
+  while (window->isOpen())
+  {
+    update();
+    render();
+  }
+}

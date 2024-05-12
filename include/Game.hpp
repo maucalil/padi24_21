@@ -31,6 +31,7 @@ public:
   void updateEvents();
   void update();
   void render();
+  void run();
 };
 
 #endif
