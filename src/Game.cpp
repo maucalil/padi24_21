@@ -26,11 +26,6 @@ Game::~Game()
   delete window;
 }
 
-const bool Game::isRunning()
-{
-  return window->isOpen();
-}
-
 void Game::updateEvents()
 {
   while (window->pollEvent(event))
@@ -68,6 +63,8 @@ void Game::run()
 {
   while (window->isOpen())
   {
+    // update delta time with the time it takes to update and render one frame
+    dt = dtClock.restart().asSeconds();
     update();
     render();
   }

@@ -16,6 +16,10 @@ private:
   sf::ContextSettings windowSettings;
   sf::Event event;
 
+  // Delta time
+  sf::Clock dtClock;
+  float dt;
+
   Player player;
 
   // Methods
@@ -27,7 +31,6 @@ public:
   virtual ~Game();
 
   // Methods
-  const bool isRunning();
   void updateEvents();
   void update();
   void render();
