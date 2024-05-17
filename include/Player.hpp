@@ -1,25 +1,19 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-#include <iostream>
-#include <SFML/Graphics.hpp>
+#include "Entity.hpp"
 
-class Player {
+class Player : public Entity {
 private:
-  sf::Texture playerTexture;
-  sf::Sprite playerSprite;
-  float movSpeed;
-
   void initVariables();
-  void initSprite();
 
 public:
-  Player(float x = 0.f, float y = 0.f);
+  Player(sf::Vector2f pos, sf::Texture* texture);
   ~Player();
+
   void updatePlayerPosition();
   void checkWindowCollision(const sf::RenderTarget* target);
-  void update(const sf::RenderTarget* target);
-  void render(sf::RenderTarget* target);
+  void update(const float dt, sf::RenderTarget *target);
 };
 
 #endif

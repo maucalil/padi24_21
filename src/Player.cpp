@@ -3,42 +3,37 @@
 
 void Player::initVariables()
 {
-  movSpeed = 4.f;
+  movSpeed = 5.f;
 }
 
-void Player::initSprite()
-{
-  if(!playerTexture.loadFromFile("../resources/player/dark_soldier-original.png")) {
-    std::cout << "Error loading player texture!" << std::endl;
-  } else {
-    playerSprite.setTexture(playerTexture);
-    playerSprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
-  }
-}
-
-Player::Player(float x, float y)
+Player::Player(sf::Vector2f pos, sf::Texture* texture)
 {
   initVariables();
-  initSprite();
-  playerSprite.setPosition(x, y);
+
+  createSprite(texture);
+  sprite.setPosition(pos);
+  sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
+
+  std::cout << "Created Player\n";
 }
 
 Player::~Player()
 {
+  std::cout << "Destroyed Player\n";
 }
 
 void Player::updatePlayerPosition()
 {
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-    playerSprite.move(-movSpeed, 0.f);
+    sprite.move(-movSpeed, 0.f);
   } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-    playerSprite.move(movSpeed, 0.f);
+    sprite.move(movSpeed, 0.f);
   }
 
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-    playerSprite.move(0.f, -movSpeed);
+    sprite.move(0.f, -movSpeed);
   } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-    playerSprite.move(0.f, movSpeed);
+    sprite.move(0.f, movSpeed);
   } 
 }
 
@@ -46,26 +41,21 @@ void Player::checkWindowCollision(const sf::RenderTarget *target)
 {
   sf::Vector2u windowSize = target->getSize();
   
-  if (playerSprite.getGlobalBounds().left <= 0.f) // Left
-    playerSprite.setPosition(0.f, playerSprite.getGlobalBounds().top);
+  if (sprite.getGlobalBounds().left <= 0.f) // Left
+    sprite.setPosition(0.f, sprite.getGlobalBounds().top);
   
-  if (playerSprite.getGlobalBounds().left + playerSprite.getGlobalBounds().width >= windowSize.x) // Right
-    playerSprite.setPosition(windowSize.x - playerSprite.getGlobalBounds().width, playerSprite.getGlobalBounds().top);
+  if (sprite.getGlobalBounds().left + sprite.getGlobalBounds().width >= windowSize.x) // Right
+    sprite.setPosition(windowSize.x - sprite.getGlobalBounds().width, sprite.getGlobalBounds().top);
 
-  if (playerSprite.getGlobalBounds().top <= 0.f) // Top
-    playerSprite.setPosition(playerSprite.getGlobalBounds().left, 0.f);
+  if (sprite.getGlobalBounds().top <= 0.f) // Top
+    sprite.setPosition(sprite.getGlobalBounds().left, 0.f);
   
-  if (playerSprite.getGlobalBounds().top + playerSprite.getGlobalBounds().height >= windowSize.y) // Down
-    playerSprite.setPosition(playerSprite.getGlobalBounds().left, windowSize.y - playerSprite.getGlobalBounds().height);
+  if (sprite.getGlobalBounds().top + sprite.getGlobalBounds().height >= windowSize.y) // Down
+    sprite.setPosition(sprite.getGlobalBounds().left, windowSize.y - sprite.getGlobalBounds().height);
 }
 
-void Player::update(const sf::RenderTarget* target)
+void Player::update(const float dt, sf::RenderTarget *target)
 {
   updatePlayerPosition();
   checkWindowCollision(target);
-}
-
-void Player::render(sf::RenderTarget* target)
-{
-  target->draw(playerSprite);
 }
