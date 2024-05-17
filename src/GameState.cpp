@@ -1,27 +1,46 @@
 #include "GameState.hpp"
 
-GameState::GameState(sf::RenderWindow* window)
-  : State(window)
+void GameState::initTextures()
 {
+  if (!textures["PLAYER_IDLE"].loadFromFile("../resources/player/dark_soldier-original.png"))
+  {
+    throw "ERROR::GAME_STATE: Could not load player texture";
+  }
+}
+
+void GameState::initEntities()
+{
+  player = new Player(sf::Vector2f(0, 0), &textures["PLAYER_IDLE"]);
+}
+
+GameState::GameState(sf::RenderWindow *window)
+    : State(window)
+{
+  initTextures();
+  initEntities();
+
   std::cout << "Created GameState\n";
 }
 
 GameState::~GameState()
 {
-  std::cout << "GameState ended!\n";
+  delete player;
+  std::cout << "Destroyed GameState\n";
 }
 
-void GameState::updateKeyBinds()
+void GameState::updateInput()
 {
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-    _quit = true;
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+    quit = true;
 }
 
-void GameState::update(const float &dt)
+void GameState::update(const float dt)
 {
-  updateKeyBinds();
+  updateInput();
+  player->update(dt, window);
 }
 
-void GameState::render(sf::RenderTarget* target)
+void GameState::render(sf::RenderTarget *target)
 {
+  player->render(target);
 }

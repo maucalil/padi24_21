@@ -2,7 +2,7 @@
 #define GAME_HPP
 
 #include "GameState.hpp"
-#include "Player.hpp"
+
 /*
   Wrapper class
 */
@@ -10,7 +10,7 @@ class Game
 {
 private:
   // Variables
-  sf::RenderWindow *window;
+  sf::RenderWindow* window;
   sf::ContextSettings windowSettings;
   sf::Event event;
 
@@ -19,8 +19,6 @@ private:
   float dt;
 
   std::stack<State*> states;
-
-  Player player;
 
   // Methods
   void initVariables();

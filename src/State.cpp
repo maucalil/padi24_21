@@ -2,8 +2,8 @@
 
 State::State(sf::RenderWindow *window)
 {
-  _window = window;
-  _quit = false;
+  this->window = window;
+  quit = false;
 }
 
 State::~State()
@@ -12,5 +12,5 @@ State::~State()
 
 const bool &State::getQuit() const
 {
-  return _quit;
+  return quit;
 }

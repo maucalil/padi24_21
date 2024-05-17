@@ -9,7 +9,7 @@ void Game::initVariables()
 void Game::initWindow()
 {
   windowSettings.antialiasingLevel = 8;
-  window = new sf::RenderWindow(sf::VideoMode(800, 600), "SFML Window", sf::Style::Close | sf::Style::Titlebar, windowSettings);
+  window = new sf::RenderWindow(sf::VideoMode(1280, 720), "SFML Window", sf::Style::Close | sf::Style::Titlebar, windowSettings);
   window->setFramerateLimit(60);
 }
 
@@ -57,7 +57,6 @@ void Game::updateEvents()
 void Game::update()
 {
   updateEvents();
-  player.update(window);
 
   if(!states.empty()) {
     states.top()->update(dt);
@@ -74,8 +73,6 @@ void Game::update()
 void Game::render()
 {
   window->clear(sf::Color::Black);
-
-  player.render(window);
 
   if(!states.empty())
     states.top()->render(window);
