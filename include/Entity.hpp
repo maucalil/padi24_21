@@ -20,8 +20,8 @@ public:
 
   void createSprite(sf::Texture* texture);
 
-  virtual void update(const float dt, sf::RenderTarget *target) = 0;
-  virtual void render(sf::RenderTarget* target);
+  virtual void update(const float dt, sf::Window* window) = 0;
+  virtual void render(sf::RenderTarget* target) = 0;
 };
 
 #endif

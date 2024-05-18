@@ -1,9 +1,11 @@
 #include "Player.hpp"
-#include <iostream>
 
 void Player::initVariables()
 {
   movSpeed = 5.f;
+  attackSpeed = 250.f;
+  fireRate = .15f; // seconds
+  fireRateTimer = 0;
 }
 
 Player::Player(sf::Vector2f pos, sf::Texture* texture)
@@ -37,10 +39,23 @@ void Player::updatePlayerPosition()
   } 
 }
 
-void Player::checkWindowCollision(const sf::RenderTarget *target)
+void Player::updateBullet(const float dt, const sf::Vector2f& target)
 {
-  sf::Vector2u windowSize = target->getSize();
-  
+  fireRateTimer += dt;
+  if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && fireRateTimer >= fireRate) {
+    Bullet bullet = Bullet(sprite.getPosition(), target, attackSpeed);
+    bullets.push_back(bullet);
+
+    fireRateTimer = 0;
+  }
+
+  for (size_t i = 0; i < bullets.size(); i++) {
+    bullets[i].update(dt);
+  }
+}
+
+void Player::checkWindowCollision(const sf::Vector2u& windowSize)
+{  
   if (sprite.getGlobalBounds().left <= 0.f) // Left
     sprite.setPosition(0.f, sprite.getGlobalBounds().top);
   
@@ -54,8 +69,20 @@ void Player::checkWindowCollision(const sf::RenderTarget *target)
     sprite.setPosition(sprite.getGlobalBounds().left, windowSize.y - sprite.getGlobalBounds().height);
 }
 
-void Player::update(const float dt, sf::RenderTarget *target)
+void Player::update(const float dt, sf::Window* window)
 {
   updatePlayerPosition();
-  checkWindowCollision(target);
+  checkWindowCollision(window->getSize());
+
+  sf::Vector2f mousePos = sf::Vector2f(sf::Mouse::getPosition(*window));
+  updateBullet(dt, mousePos);
+}
+
+void Player::render(sf::RenderTarget *target)
+{
+  target->draw(sprite);
+
+  for (size_t i = 0; i < bullets.size(); i++) {
+    bullets[i].render(target);
+  }
 }
