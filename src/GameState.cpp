@@ -1,22 +1,14 @@
 #include "GameState.hpp"
 
-void GameState::initTextures()
-{
-  if (!textures["PLAYER_IDLE"].loadFromFile("../resources/player/dark_soldier-original.png"))
-  {
-    throw "ERROR::GAME_STATE: Could not load player texture";
-  }
-}
-
 void GameState::initEntities()
 {
-  player = new Player(sf::Vector2f(0, 0), &textures["PLAYER_IDLE"]);
+  player = new Player(sf::Vector2f(0, 0));
+  enemySpawner = new EnemySpawner();
 }
 
 GameState::GameState(sf::RenderWindow *window)
     : State(window)
 {
-  initTextures();
   initEntities();
 
   std::cout << "Created GameState\n";
@@ -25,6 +17,7 @@ GameState::GameState(sf::RenderWindow *window)
 GameState::~GameState()
 {
   delete player;
+  delete enemySpawner;
   std::cout << "Destroyed GameState\n";
 }
 
@@ -38,9 +31,11 @@ void GameState::update(const float dt)
 {
   updateInput();
   player->update(dt, window);
+  enemySpawner->update(dt, player->getPosition());
 }
 
 void GameState::render(sf::RenderTarget *target)
 {
   player->render(target);
+  enemySpawner->render(target);
 }

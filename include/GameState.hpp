@@ -3,13 +3,15 @@
 
 #include "State.hpp"
 #include "Player.hpp"
+#include "Enemy.hpp"
+#include "EnemySpawner.hpp"
 
 class GameState : public State
 {
 private:
   Player* player;
+  EnemySpawner* enemySpawner;
 
-  void initTextures();
   void initEntities();
 
 public:

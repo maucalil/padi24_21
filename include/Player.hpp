@@ -3,6 +3,7 @@
 
 #include "Entity.hpp"
 #include "Bullet.hpp"
+#include "ResourceManager.hpp"
 
 class Player : public Entity {
 private:
@@ -14,10 +15,12 @@ private:
   void initVariables();
 
 public:
-  Player(sf::Vector2f pos, sf::Texture* texture);
+  Player(sf::Vector2f pos);
   ~Player();
 
-  void updatePlayerPosition();
+  sf::Vector2f getPosition();
+
+  void updatePlayerPosition(const float dt);
   void updateBullet(const float dt, const sf::Vector2f& target);
   void checkWindowCollision(const sf::Vector2u& windowSize);
 

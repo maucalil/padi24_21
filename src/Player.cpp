@@ -2,17 +2,17 @@
 
 void Player::initVariables()
 {
-  movSpeed = 5.f;
-  attackSpeed = 250.f;
+  movSpeed = 150.f;
+  attackSpeed = 500.f;
   fireRate = .15f; // seconds
   fireRateTimer = 0;
 }
 
-Player::Player(sf::Vector2f pos, sf::Texture* texture)
+Player::Player(sf::Vector2f pos)
 {
   initVariables();
 
-  createSprite(texture);
+  sprite.setTexture(*ResourceManager::getTexture("player/dark_soldier-original.png"));
   sprite.setPosition(pos);
   sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
 
@@ -24,18 +24,23 @@ Player::~Player()
   std::cout << "Destroyed Player\n";
 }
 
-void Player::updatePlayerPosition()
+sf::Vector2f Player::getPosition()
+{
+  return sprite.getPosition();
+}
+
+void Player::updatePlayerPosition(const float dt)
 {
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-    sprite.move(-movSpeed, 0.f);
+    sprite.move(-movSpeed * dt, 0.f);
   } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-    sprite.move(movSpeed, 0.f);
+    sprite.move(movSpeed * dt, 0.f);
   }
 
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-    sprite.move(0.f, -movSpeed);
+    sprite.move(0.f, -movSpeed * dt);
   } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-    sprite.move(0.f, movSpeed);
+    sprite.move(0.f, movSpeed * dt);
   } 
 }
 
@@ -71,7 +76,7 @@ void Player::checkWindowCollision(const sf::Vector2u& windowSize)
 
 void Player::update(const float dt, sf::Window* window)
 {
-  updatePlayerPosition();
+  updatePlayerPosition(dt);
   checkWindowCollision(window->getSize());
 
   sf::Vector2f mousePos = sf::Vector2f(sf::Mouse::getPosition(*window));

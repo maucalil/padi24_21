@@ -11,6 +11,7 @@ protected:
   sf::Sprite sprite;
 
   float movSpeed;
+  unsigned health;
 
   virtual void move(const float dt, const sf::Vector2f& dir);
 
@@ -20,7 +21,7 @@ public:
 
   void createSprite(sf::Texture* texture);
 
-  virtual void update(const float dt, sf::Window* window) = 0;
+  void update(const float dt, sf::Window* window);
   virtual void render(sf::RenderTarget* target) = 0;
 };
 

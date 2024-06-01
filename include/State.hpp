@@ -14,10 +14,6 @@ protected:
   sf::RenderWindow* window;
   bool quit;
 
-  //Resources
-	std::map<std::string, sf::Texture> textures;
-
-
 public:
   State(sf::RenderWindow* window);
   virtual ~State();
