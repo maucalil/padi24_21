@@ -29,7 +29,7 @@ sf::Vector2f Entity::getPosition()
   return sprite.getPosition();
 }
 
-int Entity::getHealth()
+bool Entity::isDead()
 {
-  return health;
+  return health <= 0;
 }

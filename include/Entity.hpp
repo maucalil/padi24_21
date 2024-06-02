@@ -24,7 +24,7 @@ protected:
 public:
   Hitbox& getHitbox();
   sf::Vector2f getPosition();
-  int getHealth();
+  bool isDead();
 
   void handleCollision();
   

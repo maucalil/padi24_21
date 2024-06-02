@@ -12,6 +12,8 @@ private:
 
 public:
   Bullet(const sf::Vector2f& position, const sf::Vector2f& target, float speed);
+  ~Bullet();
+
 	void update(const float dt);
   void render(sf::RenderTarget* target);
 };

@@ -25,6 +25,7 @@ Player::Player(sf::Vector2f pos)
 
 Player::~Player()
 {
+  delete hitbox;
   std::cout << "Destroyed Player\n";
 }
 

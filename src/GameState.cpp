@@ -17,12 +17,14 @@ GameState::GameState(sf::RenderWindow *window)
 GameState::~GameState()
 {
   delete player;
-  for (Bullet* bullet : bullets) {
+  for (Bullet *bullet : bullets)
+  {
     delete bullet;
   }
 
   delete enemySpawner;
-  for (Enemy* enemy : enemies) {
+  for (Enemy *enemy : enemies)
+  {
     delete enemy;
   }
 
@@ -50,66 +52,68 @@ bool GameState::checkWindowCollision(Entity &entity)
 
 bool GameState::didPlayerCollide()
 {
-  Hitbox playerHitbox = player->getHitbox();
+  // If player collides with window borders
+  if (checkWindowCollision(*player))
+    return true;
 
-  bool didPlayerCollideWithEnemy = false;
+  // Hitbox playerHitbox = player->getHitbox();
+
   // for (Enemy *enemy : enemies)
   // {
-  //   didPlayerCollideWithEnemy = playerHitbox.checkCollision(enemy->getHitbox().getHitboxBounds());
-
-  //   if (didPlayerCollideWithEnemy)
-  //   {
-  //     break;
-  //   }
+  //   if (playerHitbox.checkCollision(enemy->getHitbox().getHitboxBounds()))
+  //     return true;
   // }
 
-  bool didPlayerCollideWithWindow = checkWindowCollision(*player);
-
-  return didPlayerCollideWithEnemy || didPlayerCollideWithWindow;
+  return false;
 }
 
 bool GameState::didEnemyCollide(Enemy *enemy, int enemyId)
 {
+  // If enemy collides with window borders
+  if (checkWindowCollision(*enemy))
+    return true;
+
   Hitbox enemyHitbox = enemy->getHitbox();
 
-  bool didEnemyCollideWithPlayer = enemyHitbox.checkCollision(player->getHitbox().getHitboxBounds());
-  bool didEnemyCollideWithWindow = checkWindowCollision(*enemy);
+  // If enemy collides with player
+  if (enemyHitbox.checkCollision(player->getHitbox().getHitboxBounds()))
+    return true;
 
-  bool didEnemyCollideWithEnemy = false;
-  // for (int i=0; i < enemies.size(); i++)
+  // for (int i = 0; i < enemies.size(); i++)
   // {
-  //   if (i != enemyId) {
-  //     didEnemyCollideWithEnemy = enemyHitbox.checkCollision(enemies[i]->getHitbox().getHitboxBounds());
-
-  //     if (didEnemyCollideWithEnemy)
-  //     {
-  //       break;
-  //     }
-  //   }
+  //   // If enemy collides with another enemy
+  //   if (i != enemyId && enemyHitbox.checkCollision(enemies[i]->getHitbox().getHitboxBounds()))
+  //     return true;
   // }
 
-  return didEnemyCollideWithPlayer || didEnemyCollideWithWindow || didEnemyCollideWithEnemy;
+  return false;
 }
 
 bool GameState::didBulletCollide(Bullet &bullet)
 {
+  // If bullet collide with window borders
+  if (checkWindowCollision(bullet))
+    return true;
+
   Hitbox bulletHitbox = bullet.getHitbox();
-
-  bool didBulletCollideWithEnemy = false;
-  for (size_t i=0; i < enemies.size(); i++) {
-    didBulletCollideWithEnemy = bulletHitbox.checkCollision(enemies[i]->getHitbox().getHitboxBounds());
-
-    if (didBulletCollideWithEnemy) {
+  for (size_t i = 0; i < enemies.size(); i++)
+  {
+    // If bullet collides with an enemy
+    if (bulletHitbox.checkCollision(enemies[i]->getHitbox().getHitboxBounds()))
+    {
       enemies[i]->handleBulletHit(player->getDamage());
-      if (enemies[i]->getHealth()) {
+
+      if (enemies[i]->isDead())
+      {
         delete enemies[i];
         enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies[i]), enemies.end());
       }
-      break;
+
+      return true;
     }
   }
 
-  return didBulletCollideWithEnemy;
+  return false;
 }
 
 void GameState::updateInput()
@@ -128,18 +132,19 @@ void GameState::update(const float dt)
     player->handleCollision();
   }
 
-  for (size_t i = 0; i < bullets.size(); i++) {
+  for (size_t i = 0; i < bullets.size(); i++)
+  {
     bullets[i]->update(dt);
 
-    if (didBulletCollide(*bullets[i])) {
+    if (didBulletCollide(*bullets[i]))
+    {
       delete bullets[i];
       bullets.erase(std::remove(bullets.begin(), bullets.end(), bullets[i]), bullets.end());
-      
     }
   }
 
   enemySpawner->update(dt, enemies);
-  for (int i=0; i < enemies.size(); i++)
+  for (int i = 0; i < enemies.size(); i++)
   {
     enemies[i]->update(dt, player->getPosition());
 
@@ -153,7 +158,8 @@ void GameState::update(const float dt)
 void GameState::render(sf::RenderTarget *target)
 {
   player->render(target);
-  for (size_t i = 0; i < bullets.size(); i++) {
+  for (size_t i = 0; i < bullets.size(); i++)
+  {
     bullets[i]->render(target);
   }
 
@@ -162,5 +168,4 @@ void GameState::render(sf::RenderTarget *target)
   {
     enemies[i]->render(target);
   }
-
 }

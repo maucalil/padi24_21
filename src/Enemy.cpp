@@ -23,6 +23,7 @@ Enemy::Enemy(sf::Vector2f pos)
 
 Enemy::~Enemy()
 {
+  delete hitbox;
   std::cout << "Destroyed Enemy\n";
 }
 
