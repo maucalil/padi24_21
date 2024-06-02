@@ -9,16 +9,14 @@ private:
   sf::Vector2f pos;
   sf::RectangleShape shape;
 
-  int timeToSpawn;
+  float timeToSpawn;
   float timer;
-
-  std::vector<Enemy> enemies;
 
 public:
   EnemySpawner();
   ~EnemySpawner();
 
-	void update(const float dt, const sf::Vector2f playerPos);
+	void update(const float dt, std::vector<Enemy*>& enemies);
   void render(sf::RenderTarget* target);
 };
 

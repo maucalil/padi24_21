@@ -3,13 +3,12 @@
 
 #include "Entity.hpp"
 #include "Utils.hpp"
+#include "ResourceManager.hpp"
 
-class Bullet
+class Bullet : public Entity
 {
 private:
-  float speed;
   sf::Vector2f direction;
-  sf::CircleShape shape;
 
 public:
   Bullet(const sf::Vector2f& position, const sf::Vector2f& target, float speed);

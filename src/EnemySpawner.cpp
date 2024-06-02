@@ -2,9 +2,9 @@
 
 EnemySpawner::EnemySpawner()
 {
-  timeToSpawn = 1;
+  timeToSpawn = 0.25f;
   timer = 0.f;
-  pos = sf::Vector2f(400, 0);
+  pos = sf::Vector2f(400, 2);
   
   shape.setSize(sf::Vector2f(50, 50));
   shape.setPosition(pos);
@@ -14,27 +14,17 @@ EnemySpawner::~EnemySpawner()
 {
 }
 
-void EnemySpawner::update(const float dt, const sf::Vector2f playerPos)
+void EnemySpawner::update(const float dt, std::vector<Enemy*>& enemies)
 {
   timer += dt;
-  if (timer >= timeToSpawn && enemies.size() < 1) {
-    Enemy enemy = Enemy(pos);
-    enemies.push_back(enemy);
+  if (timer >= timeToSpawn && enemies.size() < 20) {
+    enemies.push_back(new Enemy(pos));
 
     timer = 0;
-  }
-  // std::cout << "Enemy count: " << enemies.size() << "\n";
-
-  for (size_t i = 0; i < enemies.size(); i++) {
-    enemies[i].update(dt, playerPos);
   }
 }
 
 void EnemySpawner::render(sf::RenderTarget *target)
 {
   target->draw(shape);
-
-  for (size_t i = 0; i < enemies.size(); i++) {
-    enemies[i].render(target);
-  }
 }
