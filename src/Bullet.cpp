@@ -3,8 +3,7 @@
 Bullet::Bullet(const sf::Vector2f& position, const sf::Vector2f& target, float speed)
 {
   sprite.setTexture(*ResourceManager::getTexture("player/bullet.png"));
-  sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
-  sprite.scale(sf::Vector2f(0.5, 0.5));
+  sprite.setTextureRect(sf::IntRect(148, 148, 24, 24));
   sprite.setPosition(position);
   
   direction = Utils::NormalizeVector(target - position);
