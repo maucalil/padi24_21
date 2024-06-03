@@ -17,5 +17,13 @@ sf::Vector2f Utils::NormalizeVector(sf::Vector2f vector)
 
 float Utils::GetAngle(sf::Vector2f dir)
 {
-  return atan(dir.y / dir.x) * 180 / M_PI;
+	float angle = atan(dir.y / dir.x) * 180 / M_PI;
+
+	if (dir.x < 0) {
+		angle = 180 + angle;
+	} else if (dir.y < 0) {
+		angle = 360 + angle;
+	}
+
+  return angle;
 }
