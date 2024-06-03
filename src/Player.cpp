@@ -82,12 +82,11 @@ void Player::updateBullet(const float dt, const sf::Vector2f& target, std::vecto
   }
 }
 
-void Player::update(const float dt, sf::Window* window, std::vector<Bullet*>& bullets)
+void Player::update(const float dt, sf::Vector2f mousePos, std::vector<Bullet*>& bullets)
 {
   updatePlayerPosition(dt);
   hitbox->update();
 
-  sf::Vector2f mousePos = sf::Vector2f(sf::Mouse::getPosition(*window));
   updateBullet(dt, mousePos, bullets);
 }
 

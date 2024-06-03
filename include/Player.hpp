@@ -35,7 +35,7 @@ public:
   void updatePlayerPosition(const float dt);
   void updateBullet(const float dt, const sf::Vector2f& target, std::vector<Bullet*>& bullets);
 
-  virtual void update(const float dt, sf::Window* window, std::vector<Bullet*>& bullets);
+  virtual void update(const float dt, sf::Vector2f mousePos, std::vector<Bullet*>& bullets);
   virtual void render(sf::RenderTarget* target);
 };
 

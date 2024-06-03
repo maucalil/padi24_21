@@ -123,7 +123,8 @@ void GameState::update(const float dt)
 {
   updateInput();
 
-  player->update(dt, window, bullets);
+  sf::Vector2f mousePos = sf::Vector2f(sf::Mouse::getPosition(*window));
+  player->update(dt, mousePos, bullets);
   if (didPlayerCollide())
   {
     player->handleCollision();
