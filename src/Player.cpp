@@ -76,7 +76,7 @@ void Player::updateBullet(const float dt, const sf::Vector2f& target, std::vecto
 {
   fireRateTimer += dt;
   if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && fireRateTimer >= fireRate) {
-    bullets.push_back(new Bullet(sprite.getPosition(), target, bulletSpeed));
+    bullets.push_back(new Bullet(getCenter(), target, bulletSpeed));
 
     fireRateTimer = 0;
   }

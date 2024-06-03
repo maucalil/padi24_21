@@ -19,14 +19,16 @@ protected:
   int health;
 
   virtual void move(const float dt, const sf::Vector2f& dir);
-  void createHitbox();
+  void createHitbox(bool centered=false);
 
 public:
   Hitbox& getHitbox();
   sf::Vector2f getPosition();
+  sf::Vector2f getCenter();
   bool isDead();
 
   void handleCollision();
+  void rotate(const float& angle);
   
   void update(const float dt, sf::Window* window);
   virtual void render(sf::RenderTarget* target) = 0;

@@ -14,3 +14,8 @@ sf::Vector2f Utils::NormalizeVector(sf::Vector2f vector)
 	return normalizedVector;
   return sf::Vector2f();
 }
+
+float Utils::GetAngle(sf::Vector2f dir)
+{
+  return atan(dir.y / dir.x) * 180 / M_PI;
+}

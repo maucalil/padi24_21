@@ -4,12 +4,14 @@ Bullet::Bullet(const sf::Vector2f& position, const sf::Vector2f& target, float s
 {
   sprite.setTexture(*ResourceManager::getTexture("player/bullet.png"));
   sprite.setTextureRect(sf::IntRect(148, 148, 24, 24));
+  sprite.setOrigin(getCenter());
   sprite.setPosition(position);
+  createHitbox(true);
   
   direction = Utils::NormalizeVector(target - position);
   movSpeed = speed;
 
-  createHitbox();
+  rotate(Utils::GetAngle(direction));
 }
 
 Bullet::~Bullet()

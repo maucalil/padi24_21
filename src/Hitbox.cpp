@@ -1,12 +1,19 @@
 #include "Hitbox.hpp"
 
-Hitbox::Hitbox(sf::Sprite &sprite)
+Hitbox::Hitbox(sf::Sprite &sprite, bool centered)
   : sprite(sprite)
 {
-  offset = sf::Vector2f(sprite.getGlobalBounds().width, sprite.getGlobalBounds().height);
+  size = sf::Vector2f(sprite.getGlobalBounds().width, sprite.getGlobalBounds().height);
 
-  hitbox.setSize(offset);
-  hitbox.setPosition(sprite.getPosition());
+  if (centered) {
+    position = sf::Vector2f(sprite.getOrigin().x - sprite.getGlobalBounds().width, sprite.getOrigin().y - sprite.getGlobalBounds().height);
+  } else {
+    position = sprite.getPosition();
+  }
+
+  hitbox.setOrigin(sprite.getOrigin());
+  hitbox.setSize(size);
+  hitbox.setPosition(position);
   hitbox.setFillColor(sf::Color::Transparent);
   hitbox.setOutlineColor(sf::Color::Green);
   hitbox.setOutlineThickness(1.f);
@@ -20,6 +27,11 @@ sf::FloatRect Hitbox::getHitboxBounds()
 bool Hitbox::checkCollision(const sf::FloatRect &frect)
 {
   return hitbox.getGlobalBounds().intersects(frect);
+}
+
+void Hitbox::rotate(const float& angle)
+{
+  hitbox.rotate(angle);
 }
 
 void Hitbox::update()
