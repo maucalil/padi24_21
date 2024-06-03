@@ -2,11 +2,23 @@
 
 void Player::initVariables()
 {
-  movSpeed = 150.f;
-  bulletSpeed = 500.f;
-  damage = 10;
-  fireRate = .15f; // seconds
+  bulletSpeed = DEFAULT_BULLET_SPEED;
+
+  damage = DEFAULT_DAMAGE;
+  fireRate = DEFAULT_FIRE_RATE;
+  health = DEFAULT_HEALTH;
+  missingExp = DEFAULT_MISSING_EXP;
+  movSpeed = DEFAULT_MOV_SPEED;
+
   fireRateTimer = 0;
+  levelUpPoints = 0;
+}
+
+void Player::levelUp()
+{
+  levelUpPoints++;
+  missingExp = DEFAULT_MISSING_EXP;
+  std::cout << "Leveled up!\n";
 }
 
 Player::Player(sf::Vector2f pos)
@@ -19,19 +31,25 @@ Player::Player(sf::Vector2f pos)
   sprite.scale(sf::Vector2f(2, 2));
 
   createHitbox();
-
-  std::cout << "Created Player\n";
 }
 
 Player::~Player()
 {
   delete hitbox;
-  std::cout << "Destroyed Player\n";
 }
 
 int Player::getDamage()
 {
   return damage;
+}
+
+void Player::earnExp(const int &exp)
+{
+  missingExp -= exp;
+  if (missingExp <= 0)
+    levelUp();
+    
+  std::cout << "Missing exp: " << missingExp << std::endl;
 }
 
 void Player::updatePlayerPosition(const float dt)

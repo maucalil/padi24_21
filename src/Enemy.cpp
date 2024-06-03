@@ -2,8 +2,9 @@
 
 void Enemy::initVariables()
 {
-  movSpeed = 100.f;
-  health = 10;
+  movSpeed = DEFAULT_MOV_SPEED;
+  health = DEFAULT_HEALTH;
+  exp = DEFAULT_EXP;
 }
 
 Enemy::Enemy(sf::Vector2f pos)
@@ -16,20 +17,21 @@ Enemy::Enemy(sf::Vector2f pos)
   sprite.scale(sf::Vector2f(2.f, 2.f));
 
   createHitbox();
-
-  std::cout << "Created Enemy\n";
-
 }
 
 Enemy::~Enemy()
 {
   delete hitbox;
-  std::cout << "Destroyed Enemy\n";
 }
 
 void Enemy::handleBulletHit(const int &damage)
 {
   health -= damage;
+}
+
+int Enemy::getExp()
+{
+  return exp;
 }
 
 void Enemy::update(const float dt, const sf::Vector2f target)

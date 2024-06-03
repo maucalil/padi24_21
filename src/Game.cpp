@@ -36,8 +36,6 @@ Game::~Game()
     delete states.top();
     states.pop();
   }
-  
-  std::cout << "Game ended!\n";
 }
 
 void Game::updateEvents()

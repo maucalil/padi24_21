@@ -10,8 +10,6 @@ GameState::GameState(sf::RenderWindow *window)
     : State(window)
 {
   initEntities();
-
-  std::cout << "Created GameState\n";
 }
 
 GameState::~GameState()
@@ -27,8 +25,6 @@ GameState::~GameState()
   {
     delete enemy;
   }
-
-  std::cout << "Destroyed GameState\n";
 }
 
 bool GameState::checkWindowCollision(Entity &entity)
@@ -105,6 +101,7 @@ bool GameState::didBulletCollide(Bullet &bullet)
 
       if (enemies[i]->isDead())
       {
+        player->earnExp(enemies[i]->getExp());
         delete enemies[i];
         enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies[i]), enemies.end());
       }

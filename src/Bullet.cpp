@@ -11,14 +11,11 @@ Bullet::Bullet(const sf::Vector2f& position, const sf::Vector2f& target, float s
   movSpeed = speed;
 
   createHitbox();
-
-  std::cout << "Created Bullet\n";
 }
 
 Bullet::~Bullet()
 {
   delete hitbox;
-  std::cout << "Destroyed Bullet\n";
 }
 
 void Bullet::update(const float dt)
