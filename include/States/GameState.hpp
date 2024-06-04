@@ -1,9 +1,10 @@
 #ifndef GAMESTATE_HPP
 #define GAMESTATE_HPP
 
-#include "State.hpp"
-#include "Player.hpp"
+#include "States/State.hpp"
+#include "Entities/Player.hpp"
 #include "EnemySpawner.hpp"
+#include "GUI/Button.hpp"
 
 class GameState : public State
 {

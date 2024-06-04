@@ -1,4 +1,4 @@
-#include "Hitbox.hpp"
+#include "System/Hitbox.hpp"
 
 Hitbox::Hitbox(sf::Sprite &sprite)
   : sprite(sprite)

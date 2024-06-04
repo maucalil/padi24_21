@@ -1,14 +1,14 @@
-#include "Player.hpp"
+#include "Entities/Player.hpp"
 
 void Player::initVariables()
 {
   bulletSpeed = DEFAULT_BULLET_SPEED;
 
-  damage = DEFAULT_DAMAGE;
-  fireRate = DEFAULT_FIRE_RATE;
-  health = DEFAULT_HEALTH;
-  missingExp = DEFAULT_MISSING_EXP;
-  movSpeed = DEFAULT_MOV_SPEED;
+  damage = DEFAULT_PLAYER_DAMAGE;
+  fireRate = DEFAULT_PLAYER_FIRE_RATE;
+  health = DEFAULT_PLAYER_HEALTH;
+  missingExp = DEFAULT_PLAYER_MISSING_EXP;
+  movSpeed = DEFAULT_PLAYER_MOV_SPEED;
 
   fireRateTimer = 0;
   levelUpPoints = 0;
@@ -17,7 +17,7 @@ void Player::initVariables()
 void Player::levelUp()
 {
   levelUpPoints++;
-  missingExp = DEFAULT_MISSING_EXP;
+  missingExp = DEFAULT_PLAYER_MISSING_EXP;
   std::cout << "Leveled up!\n";
 }
 

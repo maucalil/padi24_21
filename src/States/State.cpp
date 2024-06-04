@@ -1,4 +1,4 @@
-#include "State.hpp"
+#include "States/State.hpp"
 
 State::State(sf::RenderWindow *window)
 {

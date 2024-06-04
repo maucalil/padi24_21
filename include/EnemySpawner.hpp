@@ -1,7 +1,7 @@
 #ifndef ENEMYSPAWNER_HPP
 #define ENEMYSPAWNER_HPP
 
-#include "Enemy.hpp"
+#include "Entities/Enemy.hpp"
 
 class EnemySpawner
 {

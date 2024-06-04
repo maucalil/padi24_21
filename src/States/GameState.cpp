@@ -1,4 +1,4 @@
-#include "GameState.hpp"
+#include "States/GameState.hpp"
 
 void GameState::initEntities()
 {
@@ -10,6 +10,7 @@ GameState::GameState(sf::RenderWindow *window)
     : State(window)
 {
   initEntities();
+  Button* button = new Button();
 }
 
 GameState::~GameState()

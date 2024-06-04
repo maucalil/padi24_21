@@ -1,4 +1,4 @@
-#include "Entity.hpp"
+#include "Entities/Entity.hpp"
 
 void Entity::update(const float dt, sf::Window *window)
 {

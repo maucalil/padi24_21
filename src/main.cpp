@@ -1,6 +1,5 @@
-#include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "Game.hpp"
+#include "System/Game.hpp"
 
 int main()
 {

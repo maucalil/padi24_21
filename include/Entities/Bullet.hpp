@@ -1,9 +1,7 @@
 #ifndef BULLET_HPP
 #define BULLET_HPP
 
-#include "Entity.hpp"
-#include "Utils.hpp"
-#include "ResourceManager.hpp"
+#include "Entities/Entity.hpp"
 
 class Bullet : public Entity
 {

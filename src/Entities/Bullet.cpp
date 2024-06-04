@@ -1,4 +1,4 @@
-#include "Bullet.hpp"
+#include "Entities/Bullet.hpp"
 
 Bullet::Bullet(const sf::Vector2f& position, const sf::Vector2f& dir, float speed)
 {

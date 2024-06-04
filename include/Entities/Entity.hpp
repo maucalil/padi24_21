@@ -5,8 +5,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
-#include "Hitbox.hpp"
-#include "Utils.hpp"
+#include "System/Hitbox.hpp"
+#include "System/ResourceManager.hpp"
+#include "System/Utils.hpp"
 
 class Entity
 {

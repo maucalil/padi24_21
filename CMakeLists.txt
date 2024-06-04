@@ -7,6 +7,10 @@ set(BUILD_SHARED_LIBS OFF)
 
 file(GLOB SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Entities/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/GUI/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/States/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/System/*.cpp
 )
 
 # Download SFML files
@@ -17,7 +21,6 @@ FetchContent_MakeAvailable(SFML)
 # Link SFML libraries
 add_executable(${PROJECT_NAME} ${SOURCES})
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-audio)
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 
 install(TARGETS ${PROJECT_NAME})
 

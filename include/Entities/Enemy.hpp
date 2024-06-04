@@ -1,14 +1,12 @@
 #ifndef ENEMY_HPP
 #define ENEMY_HPP
 
-#include "Entity.hpp"
-#include "Utils.hpp"
-#include "ResourceManager.hpp"
+#include "Entities/Entity.hpp"
 
-#define DEFAULT_DAMAGE 10
-#define DEFAULT_HEALTH 20
-#define DEFAULT_EXP 5
-#define DEFAULT_MOV_SPEED 100.f
+#define DEFAULT_ENEMY_DAMAGE 10
+#define DEFAULT_ENEMY_HEALTH 20
+#define DEFAULT_ENEMY_EXP 5
+#define DEFAULT_ENEMY_MOV_SPEED 100.f
 
 class Enemy : public Entity
 {

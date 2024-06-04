@@ -1,16 +1,15 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-#include "Entity.hpp"
-#include "Bullet.hpp"
-#include "ResourceManager.hpp"
+#include "Entities/Entity.hpp"
+#include "Entities/Bullet.hpp"
 
 #define DEFAULT_BULLET_SPEED 500.f
-#define DEFAULT_DAMAGE 10
-#define DEFAULT_FIRE_RATE .15f // seconds
-#define DEFAULT_HEALTH 100
-#define DEFAULT_MISSING_EXP 20
-#define DEFAULT_MOV_SPEED 150.f
+#define DEFAULT_PLAYER_DAMAGE 10
+#define DEFAULT_PLAYER_FIRE_RATE .15f // seconds
+#define DEFAULT_PLAYER_HEALTH 100
+#define DEFAULT_PLAYER_MISSING_EXP 20
+#define DEFAULT_PLAYER_MOV_SPEED 150.f
 
 class Player : public Entity {
 private:

@@ -1,10 +1,10 @@
-#include "Enemy.hpp"
+#include "Entities/Enemy.hpp"
 
 void Enemy::initVariables()
 {
-  movSpeed = DEFAULT_MOV_SPEED;
-  health = DEFAULT_HEALTH;
-  exp = DEFAULT_EXP;
+  movSpeed = DEFAULT_ENEMY_MOV_SPEED;
+  health = DEFAULT_ENEMY_HEALTH;
+  exp = DEFAULT_ENEMY_EXP;
 }
 
 Enemy::Enemy(sf::Vector2f pos)
