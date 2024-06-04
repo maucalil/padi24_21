@@ -20,7 +20,7 @@ public:
 
   const bool& getQuit() const;
 
-  virtual void updateInput() = 0;
+  virtual void handleEvent(const sf::Event& event) = 0;
   virtual void update(const float dt) = 0;
   virtual void render(sf::RenderTarget* target) = 0;
 };

@@ -10,7 +10,6 @@ GameState::GameState(sf::RenderWindow *window)
     : State(window)
 {
   initEntities();
-  Button* button = new Button();
 }
 
 GameState::~GameState()
@@ -114,16 +113,32 @@ bool GameState::didBulletCollide(Bullet &bullet)
   return false;
 }
 
-void GameState::updateInput()
+void GameState::handleEvent(const sf::Event &event)
 {
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-    quit = true;
+  switch (event.type)
+  {
+  case sf::Event::KeyReleased:
+    if (event.key.code == sf::Keyboard::Num1)
+    {
+      player->increaseAttribute(Constants::DAMAGE);
+    }
+    else if (event.key.code == sf::Keyboard::Num2)
+    {
+      player->increaseAttribute(Constants::ATK_SPEED);
+    }
+    else if (event.key.code == sf::Keyboard::Num3)
+    {
+      player->increaseAttribute(Constants::HEALTH);
+    }
+    break;
+
+  default:
+    break;
+  }
 }
 
 void GameState::update(const float dt)
 {
-  updateInput();
-
   sf::Vector2f mousePos = sf::Vector2f(sf::Mouse::getPosition(*window));
   player->update(dt, mousePos, bullets);
   if (didPlayerCollide())

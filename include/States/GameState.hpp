@@ -25,7 +25,8 @@ public:
   bool didEnemyCollide(Enemy* enemy, int enemyId);
   bool didBulletCollide(Bullet& bullet);
 
-  void updateInput();
+
+  void handleEvent(const sf::Event &event);
   void update(const float dt);
   void render(sf::RenderTarget* target);
 };

@@ -3,7 +3,6 @@
 
 int main()
 {
-  // ----------------------- INITIALIZE -----------------------
   Game game;
 
   // Load a music to play
@@ -15,7 +14,6 @@ int main()
   music.play();
   music.setVolume(0);
   music.setLoop(true);
-  // ----------------------- INITIALIZE -----------------------
   
   game.run();
 

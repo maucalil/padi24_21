@@ -7,18 +7,22 @@ void Player::initVariables()
   damage = DEFAULT_PLAYER_DAMAGE;
   fireRate = DEFAULT_PLAYER_FIRE_RATE;
   health = DEFAULT_PLAYER_HEALTH;
-  missingExp = DEFAULT_PLAYER_MISSING_EXP;
+  expToNextLevel = DEFAULT_PLAYER_NEXT_LVL_EXP;
   movSpeed = DEFAULT_PLAYER_MOV_SPEED;
 
+  experience = 0;
   fireRateTimer = 0;
+  level = 1;
   levelUpPoints = 0;
 }
 
 void Player::levelUp()
 {
+  level++;
   levelUpPoints++;
-  missingExp = DEFAULT_PLAYER_MISSING_EXP;
-  std::cout << "Leveled up!\n";
+  experience -=expToNextLevel;
+  expToNextLevel += 2;
+  std::cout << "Leveled up! (" << level << ")\n";
 }
 
 Player::Player(sf::Vector2f pos)
@@ -46,11 +50,39 @@ int Player::getDamage()
 
 void Player::earnExp(const int &exp)
 {
-  missingExp -= exp;
-  if (missingExp <= 0)
+  experience += exp;
+  if (experience >= expToNextLevel)
     levelUp();
-    
-  std::cout << "Missing exp: " << missingExp << std::endl;
+}
+
+void Player::increaseAttribute(Constants::AttributeType attributeType)
+{
+  if (levelUpPoints == 0)
+    return;
+
+  switch (attributeType)
+  {
+  case Constants::AttributeType::DAMAGE:
+    damage += 2;
+    break;
+
+  case Constants::AttributeType::ATK_SPEED:
+    fireRate -= .01f;
+    break;
+
+  case Constants::AttributeType::HEALTH:
+    health += 5;
+    break;
+  
+  default:
+    break;
+  }
+
+  levelUpPoints--;
+  std::cout << "===== Stats =====\n";
+  std::cout << "Damage: " << damage << std::endl;
+  std::cout << "Atk Speed: " << fireRate << std::endl;
+  std::cout << "Health: " << health << std::endl;
 }
 
 void Player::lookToMouse(const sf::Vector2f &mousePos)

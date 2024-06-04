@@ -18,7 +18,7 @@ EnemySpawner::~EnemySpawner()
 void EnemySpawner::update(const float dt, std::vector<Enemy*>& enemies)
 {
   timer += dt;
-  if (timer >= timeToSpawn && enemies.size() < 10) {
+  if (timer >= timeToSpawn && enemies.size() < 5) {
     enemies.push_back(new Enemy(pos));
 
     timer = 0;

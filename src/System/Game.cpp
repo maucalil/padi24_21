@@ -42,11 +42,17 @@ void Game::updateEvents()
 {
   while (window->pollEvent(event))
   {
-    switch (event.type)
+    if (event.type == sf::Event::Closed)
     {
-    case sf::Event::Closed:
       window->close();
-      break;
+    }
+    else if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Escape)
+    {
+      window->close();
+    }
+    else
+    {
+      states.top()->handleEvent(event);
     }
   }
 }
@@ -56,14 +62,18 @@ void Game::update()
 {
   updateEvents();
 
-  if(!states.empty()) {
+  if (!states.empty())
+  {
     states.top()->update(dt);
 
-    if (states.top()->getQuit()) {
+    if (states.top()->getQuit())
+    {
       delete states.top();
       states.pop();
     }
-  } else {
+  }
+  else
+  {
     window->close();
   }
 }
@@ -72,7 +82,7 @@ void Game::render()
 {
   window->clear(sf::Color::Black);
 
-  if(!states.empty())
+  if (!states.empty())
     states.top()->render(window);
 
   window->display();
