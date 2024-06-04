@@ -21,6 +21,8 @@ private:
   int levelUpPoints;
   int missingExp; // how much experience is needed to the next level
 
+  sf::Vector2f lookingDirection;
+
   void initVariables();
   void levelUp();
 
@@ -31,9 +33,10 @@ public:
   int getDamage();
 
   void earnExp(const int& exp);
+  void lookToMouse(const sf::Vector2f& mousePos);
 
   void updatePlayerPosition(const float dt);
-  void updateBullet(const float dt, const sf::Vector2f& target, std::vector<Bullet*>& bullets);
+  void updateBullet(const float dt, std::vector<Bullet*>& bullets);
 
   virtual void update(const float dt, sf::Vector2f mousePos, std::vector<Bullet*>& bullets);
   virtual void render(sf::RenderTarget* target);

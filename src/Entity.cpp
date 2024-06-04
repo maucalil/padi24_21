@@ -9,9 +9,9 @@ void Entity::move(const float dt, const sf::Vector2f &dir)
   this->sprite.move(dir * dt * movSpeed);
 }
 
-void Entity::createHitbox(bool centered)
+void Entity::createHitbox()
 {
-  hitbox = new Hitbox(sprite, centered);
+  hitbox = new Hitbox(sprite);
 }
 
 void Entity::handleCollision()

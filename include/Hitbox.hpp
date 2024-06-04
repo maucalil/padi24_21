@@ -2,17 +2,17 @@
 #define HITBOX_HPP
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Hitbox
 {
 private:
   sf::RectangleShape hitbox;
   sf::Vector2f size;
-  sf::Vector2f position;
   sf::Sprite& sprite;
 
 public:
-  Hitbox(sf::Sprite& sprite, bool centered=false);
+  Hitbox(sf::Sprite& sprite);
 
   sf::FloatRect getHitboxBounds();
   bool checkCollision(const sf::FloatRect& frect);

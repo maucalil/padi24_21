@@ -1,19 +1,13 @@
 #include "Hitbox.hpp"
 
-Hitbox::Hitbox(sf::Sprite &sprite, bool centered)
+Hitbox::Hitbox(sf::Sprite &sprite)
   : sprite(sprite)
 {
   size = sf::Vector2f(sprite.getGlobalBounds().width, sprite.getGlobalBounds().height);
 
-  if (centered) {
-    position = sf::Vector2f(sprite.getOrigin().x - sprite.getGlobalBounds().width, sprite.getOrigin().y - sprite.getGlobalBounds().height);
-  } else {
-    position = sprite.getPosition();
-  }
-
-  hitbox.setOrigin(sprite.getOrigin());
   hitbox.setSize(size);
-  hitbox.setPosition(position);
+  hitbox.setOrigin(size.x / 2, size.y / 2);
+  hitbox.setPosition(sprite.getPosition());
   hitbox.setFillColor(sf::Color::Transparent);
   hitbox.setOutlineColor(sf::Color::Green);
   hitbox.setOutlineThickness(1.f);

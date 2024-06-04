@@ -7,6 +7,8 @@
 class Utils
 {
 public:
+
+	static float GetVectorModule(sf::Vector2f vector);
 	static sf::Vector2f NormalizeVector(sf::Vector2f vector);
 	static float GetAngle(sf::Vector2f dir);
 };

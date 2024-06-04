@@ -6,6 +6,7 @@
 #include <SFML/System.hpp>
 
 #include "Hitbox.hpp"
+#include "Utils.hpp"
 
 class Entity
 {
@@ -19,7 +20,7 @@ protected:
   int health;
 
   virtual void move(const float dt, const sf::Vector2f& dir);
-  void createHitbox(bool centered=false);
+  void createHitbox();
 
 public:
   Hitbox& getHitbox();

@@ -25,10 +25,11 @@ Player::Player(sf::Vector2f pos)
 {
   initVariables();
 
-  sprite.setTexture(*ResourceManager::getTexture("player/rogues.png"));
+  sprite.setTexture(*ResourceManager::getTexture("player/player.png"));
+  sprite.setTextureRect(sf::IntRect(37, 37, 259, 153));
+  sprite.setOrigin(getCenter());
   sprite.setPosition(pos);
-  sprite.setTextureRect(sf::IntRect(64, 0, 32, 32));
-  sprite.scale(sf::Vector2f(2, 2));
+  sprite.scale(sf::Vector2f(0.5f, 0.5f));
 
   createHitbox();
 }
@@ -52,6 +53,13 @@ void Player::earnExp(const int &exp)
   std::cout << "Missing exp: " << missingExp << std::endl;
 }
 
+void Player::lookToMouse(const sf::Vector2f &mousePos)
+{
+  lookingDirection = Utils::NormalizeVector(mousePos - getPosition());
+  float angle = Utils::GetAngle(lookingDirection);
+  rotate(angle - sprite.getRotation()); // rotate just what it need minding the actual rotation
+}
+
 void Player::updatePlayerPosition(const float dt)
 {
   lastValidPosition = getPosition();
@@ -72,11 +80,11 @@ void Player::updatePlayerPosition(const float dt)
   move(dt, dir);
 }
 
-void Player::updateBullet(const float dt, const sf::Vector2f& target, std::vector<Bullet*>& bullets)
+void Player::updateBullet(const float dt, std::vector<Bullet*>& bullets)
 {
   fireRateTimer += dt;
   if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && fireRateTimer >= fireRate) {
-    bullets.push_back(new Bullet(getCenter(), target, bulletSpeed));
+    bullets.push_back(new Bullet(getPosition(), lookingDirection, bulletSpeed));
 
     fireRateTimer = 0;
   }
@@ -85,9 +93,10 @@ void Player::updateBullet(const float dt, const sf::Vector2f& target, std::vecto
 void Player::update(const float dt, sf::Vector2f mousePos, std::vector<Bullet*>& bullets)
 {
   updatePlayerPosition(dt);
+  lookToMouse(mousePos);
   hitbox->update();
 
-  updateBullet(dt, mousePos, bullets);
+  updateBullet(dt, bullets);
 }
 
 void Player::render(sf::RenderTarget *target)

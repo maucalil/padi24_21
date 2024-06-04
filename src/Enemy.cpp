@@ -12,8 +12,9 @@ Enemy::Enemy(sf::Vector2f pos)
   initVariables();
 
   sprite.setTexture(*ResourceManager::getTexture("enemy/monsters.png"));
+  sprite.setTextureRect(sf::IntRect(128, 128, 32, 32));
+  sprite.setOrigin(getCenter());
   sprite.setPosition(pos);
-  sprite.setTextureRect(sf::IntRect(96, 128, 32, 32));
   sprite.scale(sf::Vector2f(2.f, 2.f));
 
   createHitbox();

@@ -2,7 +2,7 @@
 
 void GameState::initEntities()
 {
-  player = new Player(sf::Vector2f(2, 2));
+  player = new Player(sf::Vector2f(400, 400));
   enemySpawner = new EnemySpawner();
 }
 
