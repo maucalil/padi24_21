@@ -14,6 +14,8 @@ private:
   std::vector<Enemy*> enemies;
   std::vector<Bullet*> bullets;
 
+  sf::Sprite ground;
+
   void initEntities();
 
 public:

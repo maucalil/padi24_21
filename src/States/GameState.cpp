@@ -10,6 +10,9 @@ GameState::GameState(sf::RenderWindow *window)
     : State(window)
 {
   initEntities();
+
+  ground.setTexture(*ResourceManager::getTexture("ground.png"));
+  ground.setTextureRect(sf::IntRect(16, 16, 288, 288));
 }
 
 GameState::~GameState()
@@ -171,6 +174,8 @@ void GameState::update(const float dt)
 
 void GameState::render(sf::RenderTarget *target)
 {
+  target->draw(ground);
+
   player->render(target);
   for (size_t i = 0; i < bullets.size(); i++)
   {

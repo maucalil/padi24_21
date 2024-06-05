@@ -23,4 +23,21 @@ The goal of the game is to survive for as long as possible against increasing wa
 - Character development
 - Complex animations
 - Physics simulation
-- Random events
+
+## TODO
+
+- Make enemies attack player
+- Create map
+- Create GUI
+- Create main menu
+- Create animations
+- Balance progression
+
+## DONE
+
+- Single player
+- Background sound
+- Difficulty levels (enemies get stronger through the game)
+- Character development
+- Collision
+- Enemy follow player

@@ -63,11 +63,11 @@ void Player::increaseAttribute(Constants::AttributeType attributeType)
   switch (attributeType)
   {
   case Constants::AttributeType::DAMAGE:
-    damage += 2;
+    damage += 5;
     break;
 
   case Constants::AttributeType::ATK_SPEED:
-    fireRate -= .01f;
+    fireRate -= .025f;
     break;
 
   case Constants::AttributeType::HEALTH:
