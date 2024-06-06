@@ -11,6 +11,7 @@ file(GLOB SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/GUI/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/States/*.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/System/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/World/*.cpp
 )
 
 # Download SFML files

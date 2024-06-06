@@ -4,7 +4,7 @@ EnemySpawner::EnemySpawner()
 {
   timeToSpawn = 0.25f;
   timer = 0.f;
-  pos = sf::Vector2f(400 + 64, 2 + (64 / 2));
+  pos = sf::Vector2f(200, 200);
   
   shape.setSize(sf::Vector2f(64, 64));
   shape.setOrigin(shape.getGlobalBounds().width / 2, shape.getGlobalBounds().height / 2);

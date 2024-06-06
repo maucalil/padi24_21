@@ -10,9 +10,41 @@ GameState::GameState(sf::RenderWindow *window)
     : State(window)
 {
   initEntities();
+  const int firstLayerTiles[15*9] = {
+    54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54,
+    54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54,
+    54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54,
+    54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54,
+    54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54,
+    54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54,
+    54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54,
+    54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54,
+    54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54
+  };
 
-  ground.setTexture(*ResourceManager::getTexture("ground.png"));
-  ground.setTextureRect(sf::IntRect(16, 16, 288, 288));
+  const int tileMap[15*9] = {
+    54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54,  5, 16, 54, 54,
+    54,  5, 32,  1,  3, 48,  1, 32,  1, 16, 28, 51, 18, 34, 54,
+    54, 23,  8,  8,  8,  8,  8,  8,  8, 18, 51,  8,  8, 11, 54,
+    54, 35,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8, 17, 54,
+    54, 23,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8, 33, 54,
+    54, 35,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  7, 54,
+    54, 19,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8, 11, 54,
+    54, 46, 36, 52, 37, 39, 53, 53, 36, 52, 37, 39, 53, 30, 54,
+    54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54
+  };
+
+  firstLayer = new Map();
+  firstLayer->load(
+    sf::Vector2u(Constants::TileWidth, Constants::TileHeight),
+    firstLayerTiles, Constants::MapWidth, Constants::MapHeight);
+
+  map = new Map();
+  map->load(
+    sf::Vector2u(Constants::TileWidth, Constants::TileHeight),
+    tileMap, Constants::MapWidth, Constants::MapHeight);
+
+
 }
 
 GameState::~GameState()
@@ -174,15 +206,15 @@ void GameState::update(const float dt)
 
 void GameState::render(sf::RenderTarget *target)
 {
-  target->draw(ground);
-
+  firstLayer->render(target);
+  map->render(target);
   player->render(target);
   for (size_t i = 0; i < bullets.size(); i++)
   {
     bullets[i]->render(target);
   }
 
-  enemySpawner->render(target);
+  // enemySpawner->render(target);
   for (size_t i = 0; i < enemies.size(); i++)
   {
     enemies[i]->render(target);

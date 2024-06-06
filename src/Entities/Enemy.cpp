@@ -11,11 +11,11 @@ Enemy::Enemy(sf::Vector2f pos)
 {
   initVariables();
 
-  sprite.setTexture(*ResourceManager::getTexture("enemy/monsters.png"));
-  sprite.setTextureRect(sf::IntRect(128, 128, 32, 32));
+  sprite.setTexture(*ResourceManager::getTexture("enemy/enemy.png"));
+  sprite.setTextureRect(sf::IntRect(0, 0, 241, 222));
   sprite.setOrigin(getCenter());
   sprite.setPosition(pos);
-  sprite.scale(sf::Vector2f(2.f, 2.f));
+  sprite.scale(sf::Vector2f(.35f, .35f));
 
   createHitbox();
 }
@@ -40,6 +40,9 @@ void Enemy::update(const float dt, const sf::Vector2f target)
   lastValidPosition = getPosition();
   sf::Vector2f direction = Utils::NormalizeVector(target - sprite.getPosition());
   move(dt, direction);
+
+  float angle = Utils::GetAngle(direction);
+  rotate(angle - sprite.getRotation());
   hitbox->update();
 }
 

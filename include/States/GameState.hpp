@@ -5,16 +5,18 @@
 #include "Entities/Player.hpp"
 #include "EnemySpawner.hpp"
 #include "GUI/Button.hpp"
+#include "World/Map.hpp"
 
 class GameState : public State
 {
 private:
+  Map* map;
+  Map* firstLayer;
+
   Player* player;
   EnemySpawner* enemySpawner;
   std::vector<Enemy*> enemies;
   std::vector<Bullet*> bullets;
-
-  sf::Sprite ground;
 
   void initEntities();
 
