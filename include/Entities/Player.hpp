@@ -20,7 +20,7 @@ private:
   int damage;
 
   int experience;
-  int expToNextLevel; // how much experience is needed to the next level
+  int expNextLevel; // how much experience is needed to the next level
   int level;
   int levelUpPoints;
 
@@ -34,6 +34,8 @@ public:
   ~Player();
 
   int getDamage();
+  int getExp();
+  int getExpNextLevel();
 
   void earnExp(const int& exp);
   void increaseAttribute(Constants::AttributeType attributeType);

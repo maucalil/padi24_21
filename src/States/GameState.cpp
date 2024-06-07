@@ -36,6 +36,7 @@ GameState::GameState(sf::RenderWindow *window)
 GameState::~GameState()
 {
   delete map;
+  
   delete player;
   for (Bullet *bullet : bullets)
   {
@@ -164,6 +165,8 @@ void GameState::handleEvent(const sf::Event &event)
 void GameState::update(const float dt)
 {
   sf::Vector2f mousePos = sf::Vector2f(sf::Mouse::getPosition(*window));
+
+  // Entities
   player->update(dt, mousePos, bullets);
   if (didPlayerCollide())
   {
@@ -191,11 +194,17 @@ void GameState::update(const float dt)
       enemies[i]->handleCollision();
     }
   }
+
+  // GUI
+  playerGUI->update(dt);
 }
 
 void GameState::render(sf::RenderTarget &target)
 {
+  // Map
   map->render(target);
+
+  // Entities
   player->render(target);
   for (size_t i = 0; i < bullets.size(); i++)
   {
@@ -207,4 +216,7 @@ void GameState::render(sf::RenderTarget &target)
   {
     enemies[i]->render(target);
   }
+
+  // GUI
+  playerGUI->render(target);
 }

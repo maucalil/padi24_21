@@ -42,6 +42,16 @@ sf::Vector2f Entity::getCenter()
   return sf::Vector2f(spritePos.x + spriteBounds.width / 2, spritePos.y + spriteBounds.height / 2);
 }
 
+int Entity::getHealth()
+{
+  return health;
+}
+
+int Entity::getMaxHealth()
+{
+  return maxHealth;
+}
+
 bool Entity::isDead()
 {
   return health <= 0;

@@ -2,17 +2,22 @@
 #define PLAYER_GUI_HPP
 
 #include "Entities/Player.hpp"
+#include "GUI/ProgressBar.hpp"
 
 class PlayerGUI
 {
 private:
-  /* data */
+  Player *player;
+
+  ProgressBar *hpBar;
+  ProgressBar *expBar;
+
 public:
-  PlayerGUI(Player* player);
+  PlayerGUI(Player *player);
   ~PlayerGUI();
 
-  void update(const float& dt);
-  void render(sf::RenderTarget& target);
+  void update(const float &dt);
+  void render(sf::RenderTarget &target);
 };
 
 #endif

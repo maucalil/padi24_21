@@ -19,10 +19,13 @@ private:
   }
 
   std::map<std::string, sf::Texture> textures;
+  std::map<std::string, sf::Font> fonts;
+
   ResourceManager();
 
 public:
   static sf::Texture* getTexture(std::string texName);
+  static sf::Font* getFont(std::string fontName);
 };
 
 #endif

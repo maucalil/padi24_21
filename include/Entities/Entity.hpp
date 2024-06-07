@@ -19,6 +19,7 @@ protected:
 
   float movSpeed;
   int health;
+  int maxHealth;
 
   virtual void move(const float dt, const sf::Vector2f &dir);
   void createHitbox();
@@ -27,6 +28,8 @@ public:
   Hitbox &getHitbox();
   sf::Vector2f getPosition();
   sf::Vector2f getCenter();
+  int getHealth();
+  int getMaxHealth();
   bool isDead();
 
   void handleCollision();

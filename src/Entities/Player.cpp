@@ -7,7 +7,8 @@ void Player::initVariables()
   damage = DEFAULT_PLAYER_DAMAGE;
   fireRate = DEFAULT_PLAYER_FIRE_RATE;
   health = DEFAULT_PLAYER_HEALTH;
-  expToNextLevel = DEFAULT_PLAYER_NEXT_LVL_EXP;
+  maxHealth = DEFAULT_PLAYER_HEALTH;
+  expNextLevel = DEFAULT_PLAYER_NEXT_LVL_EXP;
   movSpeed = DEFAULT_PLAYER_MOV_SPEED;
 
   experience = 0;
@@ -20,8 +21,8 @@ void Player::levelUp()
 {
   level++;
   levelUpPoints++;
-  experience -=expToNextLevel;
-  expToNextLevel += 2;
+  experience -=expNextLevel;
+  expNextLevel += 2;
   std::cout << "Leveled up! (" << level << ")\n";
 }
 
@@ -48,10 +49,20 @@ int Player::getDamage()
   return damage;
 }
 
+int Player::getExp()
+{
+  return experience;
+}
+
+int Player::getExpNextLevel()
+{
+  return expNextLevel;
+}
+
 void Player::earnExp(const int &exp)
 {
   experience += exp;
-  if (experience >= expToNextLevel)
+  if (experience >= expNextLevel)
     levelUp();
 }
 
