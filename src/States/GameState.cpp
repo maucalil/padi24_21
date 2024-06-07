@@ -10,7 +10,7 @@ GameState::GameState(sf::RenderWindow *window)
     : State(window)
 {
   initEntities();
-  const int tileMap[15*9] = {
+  const int tileMap[Constants::MapWidth * Constants::MapHeight] = {
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  5, 16, -1, -1,
     -1,  5, 32,  1,  3, 48,  1, 32,  1, 16, 28, 51, 18, 34, -1,
     -1, 23,  8,  8,  8,  8,  8,  8,  8, 18, 51,  8,  8, 11, -1,
@@ -28,6 +28,7 @@ GameState::GameState(sf::RenderWindow *window)
 
 GameState::~GameState()
 {
+  delete map;
   delete player;
   for (Bullet *bullet : bullets)
   {
