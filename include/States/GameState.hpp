@@ -11,7 +11,6 @@ class GameState : public State
 {
 private:
   Map* map;
-  Map* firstLayer;
 
   Player* player;
   EnemySpawner* enemySpawner;

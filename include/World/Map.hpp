@@ -3,17 +3,22 @@
 
 #include <SFML/Graphics.hpp>
 #include "System/ResourceManager.hpp"
+#include "Constants.hpp"
 
 class Map
 {
 private:
-  sf::VertexArray vertices;
+  const sf::Vector2u tileSize = sf::Vector2u(Constants::TileWidth, Constants::TileHeight);
+  const sf::Vector2u mapSize = sf::Vector2u(Constants::MapWidth, Constants::MapHeight);
+
+  std::vector<sf::VertexArray> layers;
+
 
 public:
   Map();
   ~Map();
 
-  void load(sf::Vector2u tileSize, const int *tiles, unsigned int width, unsigned int height);
+  void load(const int* tiles);
   void render(sf::RenderTarget* target);
 };
 #endif
