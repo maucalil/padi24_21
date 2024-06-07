@@ -131,8 +131,8 @@ void Player::update(const float dt, sf::Vector2f mousePos, std::vector<Bullet*>&
   updateBullet(dt, bullets);
 }
 
-void Player::render(sf::RenderTarget *target)
+void Player::render(sf::RenderTarget &target)
 {
-  target->draw(sprite);
+  target.draw(sprite);
   hitbox->render(target);
 }

@@ -19,7 +19,7 @@ public:
   void rotate(const float& angle);
 
 	void update();
-  void render(sf::RenderTarget* target);
+  void render(sf::RenderTarget& target);
 };
 
 #endif

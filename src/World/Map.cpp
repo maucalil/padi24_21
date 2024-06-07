@@ -17,7 +17,10 @@ Map::Map()
   load(firstLayerTiles);
 }
 
-void Map::load(const int * tiles)
+Map::~Map()
+{
+}
+void Map::load(const int *tiles)
 {
   sf::Texture* tilesheet = ResourceManager::getTexture("world/tilesheet.png");
   
@@ -61,11 +64,11 @@ void Map::load(const int * tiles)
   layers.push_back(layer);
 }
 
-void Map::render(sf::RenderTarget *target)
+void Map::render(sf::RenderTarget &target)
 {
   sf::Texture* tilesheet = ResourceManager::getTexture("world/tilesheet.png");
 
   for (sf::VertexArray layer : layers) {
-    target->draw(layer, tilesheet);
+    target.draw(layer, tilesheet);
   }
 }

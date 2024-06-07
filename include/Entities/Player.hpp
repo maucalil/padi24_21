@@ -43,7 +43,7 @@ public:
   void updateBullet(const float dt, std::vector<Bullet*>& bullets);
 
   virtual void update(const float dt, sf::Vector2f mousePos, std::vector<Bullet*>& bullets);
-  virtual void render(sf::RenderTarget* target);
+  virtual void render(sf::RenderTarget& target);
 };
 
 #endif

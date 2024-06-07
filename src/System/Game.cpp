@@ -84,7 +84,7 @@ void Game::render()
   window->clear(sf::Color::Black);
 
   if (!states.empty())
-    states.top()->render(window);
+    states.top()->render(*window);
 
   window->display();
 }

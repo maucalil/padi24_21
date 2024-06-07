@@ -46,8 +46,8 @@ void Enemy::update(const float dt, const sf::Vector2f target)
   hitbox->update();
 }
 
-void Enemy::render(sf::RenderTarget *target)
+void Enemy::render(sf::RenderTarget &target)
 {
-  target->draw(sprite);
+  target.draw(sprite);
   hitbox->render(target);
 }

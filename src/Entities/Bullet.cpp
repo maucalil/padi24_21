@@ -26,8 +26,8 @@ void Bullet::update(const float dt)
   hitbox->update();
 }
 
-void Bullet::render(sf::RenderTarget *target)
+void Bullet::render(sf::RenderTarget &target)
 {
-  target->draw(sprite);
+  target.draw(sprite);
   hitbox->render(target);
 }

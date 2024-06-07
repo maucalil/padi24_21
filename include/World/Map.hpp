@@ -13,12 +13,11 @@ private:
 
   std::vector<sf::VertexArray> layers;
 
-
 public:
   Map();
   ~Map();
 
-  void load(const int* tiles);
-  void render(sf::RenderTarget* target);
+  void load(const int *tiles);
+  void render(sf::RenderTarget &target);
 };
 #endif

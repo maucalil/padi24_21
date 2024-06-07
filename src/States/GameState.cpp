@@ -6,10 +6,14 @@ void GameState::initEntities()
   enemySpawner = new EnemySpawner();
 }
 
+void GameState::initGUI()
+{
+  playerGUI = new PlayerGUI(player);
+}
+
 GameState::GameState(sf::RenderWindow *window)
     : State(window)
 {
-  initEntities();
   const int tileMap[Constants::MapWidth * Constants::MapHeight] = {
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  5, 16, -1, -1,
     -1,  5, 32,  1,  3, 48,  1, 32,  1, 16, 28, 51, 18, 34, -1,
@@ -24,6 +28,9 @@ GameState::GameState(sf::RenderWindow *window)
 
   map = new Map();
   map->load(tileMap);
+
+  initEntities();
+  initGUI();
 }
 
 GameState::~GameState()
@@ -40,6 +47,8 @@ GameState::~GameState()
   {
     delete enemy;
   }
+
+  delete playerGUI;
 }
 
 bool GameState::checkWindowCollision(Entity &entity)
@@ -184,7 +193,7 @@ void GameState::update(const float dt)
   }
 }
 
-void GameState::render(sf::RenderTarget *target)
+void GameState::render(sf::RenderTarget &target)
 {
   map->render(target);
   player->render(target);

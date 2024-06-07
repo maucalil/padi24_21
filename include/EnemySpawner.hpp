@@ -16,8 +16,8 @@ public:
   EnemySpawner();
   ~EnemySpawner();
 
-	void update(const float dt, std::vector<Enemy*>& enemies);
-  void render(sf::RenderTarget* target);
+  void update(const float dt, std::vector<Enemy *> &enemies);
+  void render(sf::RenderTarget &target);
 };
 
 #endif
