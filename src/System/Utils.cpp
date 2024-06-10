@@ -1,7 +1,5 @@
 #include "System/Utils.hpp"
 
-#include <cmath>
-
 float Utils::GetVectorModule(sf::Vector2f vector)
 {
   return sqrtf(vector.x * vector.x + vector.y * vector.y);

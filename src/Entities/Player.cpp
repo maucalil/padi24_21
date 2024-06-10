@@ -59,6 +59,18 @@ int Player::getExpNextLevel()
   return expNextLevel;
 }
 
+std::vector<std::string> Player::getAttributesMap()
+{
+  std::vector<std::string> attributesMap;
+  attributesMap.push_back("Level: " + std::to_string(level));
+  attributesMap.push_back("Points: " + std::to_string(levelUpPoints));
+  attributesMap.push_back("Damage: " + std::to_string(damage));
+  attributesMap.push_back("Atk. Speed: " + std::to_string(fireRate));
+  attributesMap.push_back("Mov. Speed: " + std::to_string(movSpeed));
+
+  return attributesMap;
+}
+
 void Player::earnExp(const int &exp)
 {
   experience += exp;
@@ -82,7 +94,8 @@ void Player::increaseAttribute(Constants::AttributeType attributeType)
     break;
 
   case Constants::AttributeType::HEALTH:
-    health += 5;
+    maxHealth += 5;
+    health = maxHealth;
     break;
   
   default:

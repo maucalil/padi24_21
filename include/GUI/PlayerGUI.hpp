@@ -3,6 +3,7 @@
 
 #include "Entities/Player.hpp"
 #include "GUI/ProgressBar.hpp"
+#include "GUI/Container.hpp"
 
 class PlayerGUI
 {
@@ -11,6 +12,8 @@ private:
 
   ProgressBar *hpBar;
   ProgressBar *expBar;
+
+  Container *attributesContainer;
 
 public:
   PlayerGUI(Player *player);

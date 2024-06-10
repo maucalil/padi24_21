@@ -36,6 +36,7 @@ public:
   int getDamage();
   int getExp();
   int getExpNextLevel();
+  std::vector<std::string> getAttributesMap();
 
   void earnExp(const int& exp);
   void increaseAttribute(Constants::AttributeType attributeType);
