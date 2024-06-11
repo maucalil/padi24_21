@@ -211,7 +211,6 @@ void GameState::render(sf::RenderTarget &target)
     bullets[i]->render(target);
   }
 
-  // enemySpawner->render(target);
   for (size_t i = 0; i < enemies.size(); i++)
   {
     enemies[i]->render(target);

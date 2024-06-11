@@ -2,22 +2,23 @@
 #define ENEMYSPAWNER_HPP
 
 #include "Entities/Enemy.hpp"
+#include "Constants.hpp"
+#include <cstdlib>
 
 class EnemySpawner
 {
 private:
   sf::Vector2f pos;
-  sf::RectangleShape shape;
 
   float timeToSpawn;
   float timer;
+  unsigned maxNumberEnemies;
 
 public:
   EnemySpawner();
   ~EnemySpawner();
 
   void update(const float dt, std::vector<Enemy *> &enemies);
-  void render(sf::RenderTarget &target);
 };
 
 #endif

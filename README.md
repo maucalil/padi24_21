@@ -26,6 +26,7 @@ The goal of the game is to survive for as long as possible against increasing wa
 
 ## TODO
 
+- Collision
 - Make enemies attack player
 - Create main menu
 - Create animations
@@ -37,7 +38,6 @@ The goal of the game is to survive for as long as possible against increasing wa
 - Background sound
 - Difficulty levels (enemies get stronger through the game)
 - Character development
-- Collision
 - Enemy follow player
 - Map
 - GUI

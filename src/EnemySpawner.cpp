@@ -2,13 +2,10 @@
 
 EnemySpawner::EnemySpawner()
 {
+  srand(time(0));
   timeToSpawn = 0.25f;
   timer = 0.f;
-  pos = sf::Vector2f(200, 200);
-
-  shape.setSize(sf::Vector2f(64, 64));
-  shape.setOrigin(shape.getGlobalBounds().width / 2, shape.getGlobalBounds().height / 2);
-  shape.setPosition(pos);
+  maxNumberEnemies = 20;
 }
 
 EnemySpawner::~EnemySpawner()
@@ -18,15 +15,11 @@ EnemySpawner::~EnemySpawner()
 void EnemySpawner::update(const float dt, std::vector<Enemy *> &enemies)
 {
   timer += dt;
-  if (timer >= timeToSpawn && enemies.size() < 5)
+  if (timer >= timeToSpawn && enemies.size() < maxNumberEnemies)
   {
+    sf::Vector2f pos = Constants::GetEnemySpawnPosition(rand() % Constants::NumPossibleEnemyPos);
     enemies.push_back(new Enemy(pos));
 
     timer = 0;
   }
-}
-
-void EnemySpawner::render(sf::RenderTarget &target)
-{
-  target.draw(shape);
 }
