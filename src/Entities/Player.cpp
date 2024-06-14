@@ -35,13 +35,10 @@ Player::Player(sf::Vector2f pos)
   sprite.setOrigin(getCenter());
   sprite.setPosition(pos);
   sprite.scale(sf::Vector2f(0.5f, 0.5f));
-
-  createHitbox();
 }
 
 Player::~Player()
 {
-  delete hitbox;
 }
 
 int Player::getDamage()
@@ -150,7 +147,6 @@ void Player::update(const float dt, sf::Vector2f mousePos, std::vector<Bullet*>&
 {
   updatePlayerPosition(dt);
   lookToMouse(mousePos);
-  hitbox->update();
 
   updateBullet(dt, bullets);
 }
@@ -158,5 +154,4 @@ void Player::update(const float dt, sf::Vector2f mousePos, std::vector<Bullet*>&
 void Player::render(sf::RenderTarget &target)
 {
   target.draw(sprite);
-  hitbox->render(target);
 }

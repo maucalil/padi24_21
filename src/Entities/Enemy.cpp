@@ -16,13 +16,10 @@ Enemy::Enemy(sf::Vector2f pos)
   sprite.setOrigin(getCenter());
   sprite.setPosition(pos);
   sprite.scale(sf::Vector2f(.35f, .35f));
-
-  createHitbox();
 }
 
 Enemy::~Enemy()
 {
-  delete hitbox;
 }
 
 void Enemy::handleBulletHit(const int &damage)
@@ -43,11 +40,9 @@ void Enemy::update(const float dt, const sf::Vector2f target)
 
   float angle = Utils::GetAngle(direction);
   rotate(angle - sprite.getRotation());
-  hitbox->update();
 }
 
 void Enemy::render(sf::RenderTarget &target)
 {
   target.draw(sprite);
-  hitbox->render(target);
 }

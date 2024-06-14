@@ -7,7 +7,6 @@ Bullet::Bullet(const sf::Vector2f& position, const sf::Vector2f& dir, float spee
   sprite.setOrigin(getCenter());
   sprite.setPosition(position);
   sprite.scale(sf::Vector2f(0.3f, 0.3f));
-  createHitbox();
   
   direction = dir;
   movSpeed = speed;
@@ -17,17 +16,14 @@ Bullet::Bullet(const sf::Vector2f& position, const sf::Vector2f& dir, float spee
 
 Bullet::~Bullet()
 {
-  delete hitbox;
 }
 
 void Bullet::update(const float dt)
 {
   move(dt, direction);
-  hitbox->update();
 }
 
 void Bullet::render(sf::RenderTarget &target)
 {
   target.draw(sprite);
-  hitbox->render(target);
 }

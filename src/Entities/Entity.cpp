@@ -9,11 +9,6 @@ void Entity::move(const float dt, const sf::Vector2f &dir)
   this->sprite.move(dir * dt * movSpeed);
 }
 
-void Entity::createHitbox()
-{
-  hitbox = new Hitbox(sprite);
-}
-
 void Entity::handleCollision()
 {
   sprite.setPosition(lastValidPosition);
@@ -22,12 +17,11 @@ void Entity::handleCollision()
 void Entity::rotate(const float &angle)
 {
   sprite.rotate(angle);
-  hitbox->rotate(angle);
 }
 
-Hitbox& Entity::getHitbox()
+sf::Sprite Entity::getSprite()
 {
-  return *hitbox;
+  return sprite;
 }
 
 sf::Vector2f Entity::getPosition()

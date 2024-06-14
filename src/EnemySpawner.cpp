@@ -5,7 +5,7 @@ EnemySpawner::EnemySpawner()
   srand(time(0));
   timeToSpawn = 0.25f;
   timer = 0.f;
-  maxNumberEnemies = 20;
+  maxNumberEnemies = 15;
 }
 
 EnemySpawner::~EnemySpawner()

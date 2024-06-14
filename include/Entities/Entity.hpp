@@ -5,7 +5,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
-#include "System/Hitbox.hpp"
 #include "System/ResourceManager.hpp"
 #include "System/Utils.hpp"
 
@@ -13,7 +12,6 @@ class Entity
 {
 protected:
   sf::Sprite sprite;
-  Hitbox *hitbox;
 
   sf::Vector2f lastValidPosition;
 
@@ -22,10 +20,9 @@ protected:
   int maxHealth;
 
   virtual void move(const float dt, const sf::Vector2f &dir);
-  void createHitbox();
 
 public:
-  Hitbox &getHitbox();
+  sf::Sprite getSprite();
   sf::Vector2f getPosition();
   sf::Vector2f getCenter();
   int getHealth();

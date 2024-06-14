@@ -2,7 +2,7 @@
 
 void GameState::initEntities()
 {
-  player = new Player(sf::Vector2f(400, 400));
+  player = new Player(sf::Vector2f(960, 540));
   enemySpawner = new EnemySpawner();
 }
 
@@ -52,20 +52,20 @@ GameState::~GameState()
   delete playerGUI;
 }
 
-bool GameState::checkWindowCollision(Entity &entity)
+bool GameState::checkWindowCollision(const sf::Sprite &sprite)
 {
-  sf::FloatRect entityHitbox = entity.getHitbox().getHitboxBounds();
+  sf::FloatRect spriteBounds = sprite.getGlobalBounds();
 
-  if (entityHitbox.left <= 0.f) // Left
+  if (spriteBounds.left <= 0.f) // Left
     return true;
 
-  if (entityHitbox.left + entityHitbox.width >= window->getSize().x) // Right
+  if (spriteBounds.left + spriteBounds.width >= window->getSize().x) // Right
     return true;
 
-  if (entityHitbox.top <= 0.f) // Top
+  if (spriteBounds.top <= 0.f) // Top
     return true;
 
-  if (entityHitbox.top + entityHitbox.height >= window->getSize().y) // Down
+  if (spriteBounds.top + spriteBounds.height >= window->getSize().y) // Down
     return true;
 
   return false;
@@ -74,16 +74,8 @@ bool GameState::checkWindowCollision(Entity &entity)
 bool GameState::didPlayerCollide()
 {
   // If player collides with window borders
-  if (checkWindowCollision(*player))
+  if (checkWindowCollision(player->getSprite()))
     return true;
-
-  // Hitbox playerHitbox = player->getHitbox();
-
-  // for (Enemy *enemy : enemies)
-  // {
-  //   if (playerHitbox.checkCollision(enemy->getHitbox().getHitboxBounds()))
-  //     return true;
-  // }
 
   return false;
 }
@@ -91,21 +83,12 @@ bool GameState::didPlayerCollide()
 bool GameState::didEnemyCollide(Enemy *enemy, int enemyId)
 {
   // If enemy collides with window borders
-  if (checkWindowCollision(*enemy))
+  if (checkWindowCollision(enemy->getSprite()))
     return true;
-
-  Hitbox enemyHitbox = enemy->getHitbox();
 
   // If enemy collides with player
-  if (enemyHitbox.checkCollision(player->getHitbox().getHitboxBounds()))
+  if (Collision::PixelPerfectTest(enemy->getSprite(), player->getSprite()))
     return true;
-
-  // for (int i = 0; i < enemies.size(); i++)
-  // {
-  //   // If enemy collides with another enemy
-  //   if (i != enemyId && enemyHitbox.checkCollision(enemies[i]->getHitbox().getHitboxBounds()))
-  //     return true;
-  // }
 
   return false;
 }
@@ -113,14 +96,13 @@ bool GameState::didEnemyCollide(Enemy *enemy, int enemyId)
 bool GameState::didBulletCollide(Bullet &bullet)
 {
   // If bullet collide with window borders
-  if (checkWindowCollision(bullet))
+  if (checkWindowCollision(bullet.getSprite()))
     return true;
 
-  Hitbox bulletHitbox = bullet.getHitbox();
   for (size_t i = 0; i < enemies.size(); i++)
   {
     // If bullet collides with an enemy
-    if (bulletHitbox.checkCollision(enemies[i]->getHitbox().getHitboxBounds()))
+    if (Collision::PixelPerfectTest(bullet.getSprite(), enemies[i]->getSprite()))
     {
       enemies[i]->handleBulletHit(player->getDamage());
 

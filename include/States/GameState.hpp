@@ -7,6 +7,7 @@
 #include "GUI/PlayerGUI.hpp"
 #include "States/State.hpp"
 #include "World/Map.hpp"
+#include "System/Collision.hpp"
 
 class GameState : public State
 {
@@ -29,7 +30,7 @@ public:
   GameState(sf::RenderWindow *window);
   ~GameState();
 
-  bool checkWindowCollision(Entity &entity);
+  bool checkWindowCollision(const sf::Sprite &sprite);
   bool didPlayerCollide();
   bool didEnemyCollide(Enemy *enemy, int enemyId);
   bool didBulletCollide(Bullet &bullet);
