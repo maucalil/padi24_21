@@ -2,14 +2,12 @@
 
 void Player::initVariables()
 {
-  bulletSpeed = DEFAULT_BULLET_SPEED;
-
-  damage = DEFAULT_PLAYER_DAMAGE;
-  fireRate = DEFAULT_PLAYER_FIRE_RATE;
-  health = DEFAULT_PLAYER_HEALTH;
-  maxHealth = DEFAULT_PLAYER_HEALTH;
-  expNextLevel = DEFAULT_PLAYER_NEXT_LVL_EXP;
-  movSpeed = DEFAULT_PLAYER_MOV_SPEED;
+  damage = Constants::DefaultPlayerDamage;
+  fireRate = Constants::DefaultPlayerFireRate;
+  health = Constants::DefaultPlayerHealth;
+  maxHealth = Constants::DefaultPlayerHealth;
+  expNextLevel = Constants::DefaultPlayerExpNextLvl;
+  movSpeed = Constants::DefaultPlayerMovSpeed;
 
   experience = 0;
   fireRateTimer = 0;
@@ -34,7 +32,7 @@ Player::Player(sf::Vector2f pos)
   sprite.setTextureRect(sf::IntRect(37, 37, 259, 153));
   sprite.setOrigin(getCenter());
   sprite.setPosition(pos);
-  sprite.scale(sf::Vector2f(0.5f, 0.5f));
+  sprite.scale(sf::Vector2f(0.4f, 0.4f));
 }
 
 Player::~Player()
@@ -137,7 +135,7 @@ void Player::updateBullet(const float dt, std::vector<Bullet*>& bullets)
 {
   fireRateTimer += dt;
   if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && fireRateTimer >= fireRate) {
-    bullets.push_back(new Bullet(getPosition(), lookingDirection, bulletSpeed));
+    bullets.push_back(new Bullet(getPosition(), lookingDirection));
 
     fireRateTimer = 0;
   }

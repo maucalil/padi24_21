@@ -2,9 +2,10 @@
 
 void Enemy::initVariables()
 {
-  movSpeed = DEFAULT_ENEMY_MOV_SPEED;
-  health = DEFAULT_ENEMY_HEALTH;
-  exp = DEFAULT_ENEMY_EXP;
+  damage = Constants::DefaultEnemyDamage;
+  exp = Constants::DefaultEnemyExp;
+  health = Constants::DefaultEnemyHealth;
+  movSpeed = Constants::DefaultEnemyMovSpeed;
 }
 
 Enemy::Enemy(sf::Vector2f pos)
@@ -15,7 +16,7 @@ Enemy::Enemy(sf::Vector2f pos)
   sprite.setTextureRect(sf::IntRect(0, 0, 241, 222));
   sprite.setOrigin(getCenter());
   sprite.setPosition(pos);
-  sprite.scale(sf::Vector2f(.35f, .35f));
+  sprite.scale(sf::Vector2f(.3f, .3f));
 }
 
 Enemy::~Enemy()

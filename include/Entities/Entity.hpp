@@ -7,6 +7,7 @@
 
 #include "System/ResourceManager.hpp"
 #include "System/Utils.hpp"
+#include "Constants.hpp"
 
 class Entity
 {

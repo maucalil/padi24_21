@@ -9,7 +9,7 @@ private:
   sf::Vector2f direction;
 
 public:
-  Bullet(const sf::Vector2f &position, const sf::Vector2f &dir, float speed);
+  Bullet(const sf::Vector2f &position, const sf::Vector2f &dir);
   ~Bullet();
 
   void update(const float dt);

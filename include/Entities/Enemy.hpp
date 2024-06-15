@@ -3,15 +3,11 @@
 
 #include "Entities/Entity.hpp"
 
-#define DEFAULT_ENEMY_DAMAGE 10
-#define DEFAULT_ENEMY_HEALTH 20
-#define DEFAULT_ENEMY_EXP 5
-#define DEFAULT_ENEMY_MOV_SPEED 100.f
-
 class Enemy : public Entity
 {
 private:
   int exp; // how much experience it is worth when killed
+  int damage;
   void initVariables();
 
   void updateEnemyPosition();
