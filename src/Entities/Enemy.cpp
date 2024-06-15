@@ -2,6 +2,7 @@
 
 void Enemy::initVariables()
 {
+  attackSpeed = Constants::DefaultEnemyAttackSpeed;
   damage = Constants::DefaultEnemyDamage;
   exp = Constants::DefaultEnemyExp;
   health = Constants::DefaultEnemyHealth;
@@ -31,6 +32,21 @@ void Enemy::handleBulletHit(const int &damage)
 int Enemy::getExp()
 {
   return exp;
+}
+
+int Enemy::getDamage()
+{
+  return damage;
+}
+
+bool Enemy::haveAttacked()
+{
+  if (attackTimer.getElapsedTime().asSeconds() >= attackSpeed) {
+    attackTimer.restart();
+    return true;
+  }
+
+  return false;
 }
 
 void Enemy::update(const float dt, const sf::Vector2f target)

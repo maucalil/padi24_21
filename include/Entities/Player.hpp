@@ -31,6 +31,7 @@ public:
 
   void earnExp(const int& exp);
   void increaseAttribute(Constants::AttributeType attributeType);
+  void handleEnemyHit(const int &damage);
   void lookToMouse(const sf::Vector2f& mousePos);
 
   void updatePlayerPosition(const float dt);

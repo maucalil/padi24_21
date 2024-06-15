@@ -22,6 +22,9 @@ ProgressBar::~ProgressBar()
 
 void ProgressBar::update(const int current_value, const int max_value)
 {
+	if (current_value < 0)
+		return;
+		
 	float percent = static_cast<float>(current_value) / static_cast<float>(max_value);
 	float scale = back.getGlobalBounds().width / max_value;
 

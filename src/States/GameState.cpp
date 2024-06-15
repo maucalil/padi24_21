@@ -25,7 +25,7 @@ GameState::GameState(sf::RenderWindow *window)
     -1, 46, 36, 52, 37, 39, 53, 53, 36, 52, 37, 39, 53, 30, -1,
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
   };
-
+  
   map = new Map();
   map->load(tileMap);
 
@@ -36,7 +36,7 @@ GameState::GameState(sf::RenderWindow *window)
 GameState::~GameState()
 {
   delete map;
-  
+
   delete player;
   for (Bullet *bullet : bullets)
   {
@@ -88,7 +88,12 @@ bool GameState::didEnemyCollide(Enemy *enemy, int enemyId)
 
   // If enemy collides with player
   if (Collision::PixelPerfectTest(enemy->getSprite(), player->getSprite()))
+  {
+    if (enemy->haveAttacked())
+      player->handleEnemyHit(enemy->getDamage());
+
     return true;
+  }
 
   return false;
 }

@@ -94,14 +94,15 @@ void Player::increaseAttribute(Constants::AttributeType attributeType)
     break;
   
   default:
-    break;
+    return;
   }
 
   levelUpPoints--;
-  std::cout << "===== Stats =====\n";
-  std::cout << "Damage: " << damage << std::endl;
-  std::cout << "Atk Speed: " << fireRate << std::endl;
-  std::cout << "Health: " << health << std::endl;
+}
+
+void Player::handleEnemyHit(const int &damage)
+{
+  health -= damage;
 }
 
 void Player::lookToMouse(const sf::Vector2f &mousePos)
