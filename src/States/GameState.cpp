@@ -11,8 +11,8 @@ void GameState::initGUI()
   playerGUI = new PlayerGUI(player);
 }
 
-GameState::GameState(sf::RenderWindow *window)
-    : State(window)
+GameState::GameState(sf::RenderWindow *window, std::stack<State *> *states)
+    : State(window, states)
 {
   const int tileMap[Constants::MapWidth * Constants::MapHeight] = {
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  5, 16, -1, -1,

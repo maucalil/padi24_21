@@ -1,7 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "States/GameState.hpp"
+#include "States/MainMenuState.hpp"
 
 /*
   Wrapper class

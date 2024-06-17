@@ -27,7 +27,7 @@ private:
   void initGUI();
 
 public:
-  GameState(sf::RenderWindow *window);
+  GameState(sf::RenderWindow *window, std::stack<State *> *states);
   ~GameState();
 
   bool checkWindowCollision(const sf::Sprite &sprite);

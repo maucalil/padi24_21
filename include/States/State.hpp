@@ -3,19 +3,18 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include <vector>
 #include <stack>
-#include <map>
-#include <iostream>
+#include "System/ResourceManager.hpp"
 
 class State
 {
 protected:
   sf::RenderWindow *window;
+  std::stack<State *> *states;
   bool quit;
 
 public:
-  State(sf::RenderWindow *window);
+  State(sf::RenderWindow *window, std::stack<State *> *states);
   virtual ~State();
 
   const bool &getQuit() const;
