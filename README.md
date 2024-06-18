@@ -27,7 +27,6 @@ The goal of the game is to survive for as long as possible against increasing wa
 ## TODO
 
 - Collision with map
-- Create main menu
 - Create animations
 - Balance progression
 
@@ -40,5 +39,7 @@ The goal of the game is to survive for as long as possible against increasing wa
 - Enemy follow player
 - Map
 - GUI
-- Collision between entities
+- Collision between entities (physics)
 - Make enemies attack player
+- Create main menu
+- Wave System

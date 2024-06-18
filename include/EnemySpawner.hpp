@@ -12,11 +12,24 @@ private:
 
   float timeToSpawn;
   float timer;
-  unsigned maxNumberEnemies;
+
+  unsigned wave;
+  unsigned waveNumEnemies;
+  unsigned numEnemiesSpawned;
+  unsigned remainingEnemies;
+  bool canSpawn;
 
 public:
   EnemySpawner();
   ~EnemySpawner();
+
+  unsigned getWave();
+  unsigned getWaveNumEnemies();
+  unsigned getRemainingEnemies();
+
+  bool isSpawning();
+  void startSpawning();
+  void handleEnemyKilled();
 
   void update(const float dt, std::vector<Enemy *> &enemies);
 };

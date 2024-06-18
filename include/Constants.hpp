@@ -11,7 +11,16 @@ public:
   {
     DAMAGE = 0,
     ATK_SPEED = 1,
-    HEALTH = 2
+    HEALTH = 2,
+    MOV_SPEED = 3,
+  };
+
+  enum AttributeMax
+  {
+    DAMAGE_MAX = 250,
+    ATK_SPEED_MAX = 0,
+    HEALTH_MAX = 1000,
+    MOV_SPEED_MAX = 500,
   };
 
   // Map
@@ -37,6 +46,9 @@ public:
   static constexpr int DefaultEnemyExp = 5;
   static constexpr float DefaultEnemyMovSpeed = 100.f;
   static constexpr float DefaultEnemyAttackSpeed = 1.f; // 1 attack per second
+
+  // Wave
+  static constexpr int DefaultWaveNumEnemies = 15;
 
   static sf::Vector2f GetEnemySpawnPosition(int number);
 };

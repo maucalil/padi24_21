@@ -47,10 +47,6 @@ void Game::updateEvents()
     {
       window->close();
     }
-    else if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Escape)
-    {
-      window->close();
-    }
     else
     {
       states.top()->handleEvent(event);

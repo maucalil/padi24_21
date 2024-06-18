@@ -1,5 +1,14 @@
 #include "States/GameState.hpp"
 
+std::string GameState::getWaveText()
+{
+  std::string wave = std::to_string(enemySpawner->getWave());
+  std::string killCounter = std::to_string(enemySpawner->getWaveNumEnemies() - enemySpawner->getRemainingEnemies());
+  std::string waveNumEnemies = std::to_string(enemySpawner->getWaveNumEnemies());
+
+  return "Wave " + wave + " (" + killCounter + "/" + waveNumEnemies + ")";
+}
+
 void GameState::initEntities()
 {
   player = new Player(sf::Vector2f(960, 540));
@@ -9,6 +18,14 @@ void GameState::initEntities()
 void GameState::initGUI()
 {
   playerGUI = new PlayerGUI(player);
+
+  waveInfo.setFont(*ResourceManager::getFont("fonts/arial.ttf"));
+  waveInfo.setString(getWaveText());
+
+  sf::FloatRect waveInfoBounds = waveInfo.getGlobalBounds();
+  waveInfo.setOrigin(waveInfoBounds.left + waveInfoBounds.width / 2, waveInfoBounds.top + waveInfoBounds.height / 2);
+
+  waveInfo.setPosition(window->getView().getSize().x / 2.f, 30.f);
 }
 
 GameState::GameState(sf::RenderWindow *window, std::stack<State *> *states)
@@ -116,6 +133,7 @@ bool GameState::didBulletCollide(Bullet &bullet)
         player->earnExp(enemies[i]->getExp());
         delete enemies[i];
         enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies[i]), enemies.end());
+        enemySpawner->handleEnemyKilled();
       }
 
       return true;
@@ -130,7 +148,11 @@ void GameState::handleEvent(const sf::Event &event)
   switch (event.type)
   {
   case sf::Event::KeyReleased:
-    if (event.key.code == sf::Keyboard::Num1)
+    if (event.key.code == sf::Keyboard::Escape)
+    {
+      window->close();
+    }
+    else if (event.key.code == sf::Keyboard::Num1)
     {
       player->increaseAttribute(Constants::DAMAGE);
     }
@@ -141,6 +163,13 @@ void GameState::handleEvent(const sf::Event &event)
     else if (event.key.code == sf::Keyboard::Num3)
     {
       player->increaseAttribute(Constants::HEALTH);
+    }
+    else if (event.key.code == sf::Keyboard::Num4)
+    {
+      player->increaseAttribute(Constants::MOV_SPEED);
+    }
+    else if (!enemySpawner->isSpawning() && event.key.code == sf::Keyboard::R) {
+      enemySpawner->startSpawning();
     }
     break;
 
@@ -184,6 +213,7 @@ void GameState::update(const float dt)
 
   // GUI
   playerGUI->update(dt);
+  waveInfo.setString(getWaveText());
 }
 
 void GameState::render(sf::RenderTarget &target)
@@ -205,4 +235,5 @@ void GameState::render(sf::RenderTarget &target)
 
   // GUI
   playerGUI->render(target);
+  target.draw(waveInfo);
 }

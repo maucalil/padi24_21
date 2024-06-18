@@ -22,6 +22,9 @@ private:
 
   // GUI
   PlayerGUI *playerGUI;
+  sf::Text waveInfo;
+
+  std::string getWaveText();
 
   void initEntities();
   void initGUI();

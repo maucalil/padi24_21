@@ -92,6 +92,10 @@ void Player::increaseAttribute(Constants::AttributeType attributeType)
     maxHealth += 5;
     health = maxHealth;
     break;
+
+  case Constants::AttributeType::MOV_SPEED:
+    movSpeed += 10.f;
+    break;
   
   default:
     return;
