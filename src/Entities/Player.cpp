@@ -13,13 +13,25 @@ void Player::initVariables()
   fireRateTimer = 0;
   level = 1;
   levelUpPoints = 0;
+
+  isShooting = false;
+}
+
+void Player::initAnimations()
+{
+  Animation *idleAnimation = new Animation(sprite, ResourceManager::getTexture("player/player_idle.png"),
+                            sf::Vector2u(Constants::PlayerIdleFrameWidth, Constants::PlayerIdleFrameHeight),
+                            Constants::PlayerIdleNumFrames,
+                            Constants::PlayerIdleTimePerFrame);
+  idleAnimation->setRepeat(true);
+  animations[PlayerState::IDLE] = idleAnimation;
 }
 
 void Player::levelUp()
 {
   level++;
   levelUpPoints++;
-  experience -=expNextLevel;
+  experience -= expNextLevel;
   expNextLevel += 2;
   std::cout << "Leveled up! (" << level << ")\n";
 }
@@ -27,9 +39,10 @@ void Player::levelUp()
 Player::Player(sf::Vector2f pos)
 {
   initVariables();
+  initAnimations();
 
-  sprite.setTexture(*ResourceManager::getTexture("player/player.png"));
-  sprite.setTextureRect(sf::IntRect(37, 37, 259, 153));
+  changeAnimation(*animations[PlayerState::IDLE]);
+
   sprite.setOrigin(getCenter());
   sprite.setPosition(pos);
   sprite.scale(sf::Vector2f(0.4f, 0.4f));
@@ -96,7 +109,7 @@ void Player::increaseAttribute(Constants::AttributeType attributeType)
   case Constants::AttributeType::MOV_SPEED:
     movSpeed += 10.f;
     break;
-  
+
   default:
     return;
   }
@@ -116,42 +129,83 @@ void Player::lookToMouse(const sf::Vector2f &mousePos)
   rotate(angle - sprite.getRotation()); // rotate just what it need minding the actual rotation
 }
 
+void Player::changeState(PlayerState state)
+{
+  playerState = state;
+}
+
+void Player::changeAnimation(Animation &animation, bool wait)
+{
+  currentAnimation = &animation;
+}
+
 void Player::updatePlayerPosition(const float dt)
 {
   lastValidPosition = getPosition();
   sf::Vector2f dir = sf::Vector2f(0.f, 0.f);
 
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+  {
     dir = sf::Vector2f(-1.f, 0.f);
-  } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+  }
+  else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+  {
     dir = sf::Vector2f(1.f, 0.f);
   }
 
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+  {
     dir += sf::Vector2f(0.f, -1.f);
-  } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+  }
+  else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+  {
     dir += sf::Vector2f(0.f, 1.f);
   }
+
+  if (dir != sf::Vector2f(0.f, 0.f))
+    changeState(PlayerState::MOVING);
+  else
+    changeState(PlayerState::IDLE);
 
   move(dt, dir);
 }
 
-void Player::updateBullet(const float dt, std::vector<Bullet*>& bullets)
+void Player::updateBullet(const float dt, std::vector<Bullet *> &bullets)
 {
+  isShooting = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
   fireRateTimer += dt;
-  if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && fireRateTimer >= fireRate) {
+  if (isShooting && fireRateTimer >= fireRate)
+  {
     bullets.push_back(new Bullet(getPosition(), lookingDirection));
+    changeState(PlayerState::SHOOTING);
 
     fireRateTimer = 0;
   }
 }
 
-void Player::update(const float dt, sf::Vector2f mousePos, std::vector<Bullet*>& bullets)
+void Player::updateAnimation()
 {
-  updatePlayerPosition(dt);
-  lookToMouse(mousePos);
+  if (playerState == SHOOTING)
+  {
+    // changeAnimation();
+  }
+  else if (playerState == MOVING)
+  {
+    // changeAnimation();
+  }
+  else
+  {
+    // changeAnimation();
+  }
+}
 
+void Player::update(const float dt, sf::Vector2f mousePos, std::vector<Bullet *> &bullets)
+{
+  lookToMouse(mousePos);
+  updatePlayerPosition(dt);
   updateBullet(dt, bullets);
+
+  currentAnimation->update(dt);
 }
 
 void Player::render(sf::RenderTarget &target)

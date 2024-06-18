@@ -3,9 +3,22 @@
 
 #include "Entities/Entity.hpp"
 #include "Entities/Bullet.hpp"
+#include "System/Animation.hpp"
 
-class Player : public Entity {
+class Player : public Entity
+{
 private:
+  enum PlayerState
+  {
+    IDLE,
+    MOVING,
+    SHOOTING,
+  };
+  PlayerState playerState;
+  bool isShooting;
+
+  std::map<PlayerState, Animation*> animations;
+
   float fireRate;
   float fireRateTimer; // how much time has passed since the last shoot
   int damage;
@@ -18,6 +31,7 @@ private:
   sf::Vector2f lookingDirection;
 
   void initVariables();
+  void initAnimations();
   void levelUp();
 
 public:
@@ -29,16 +43,20 @@ public:
   int getExpNextLevel();
   std::vector<std::string> getAttributesMap();
 
-  void earnExp(const int& exp);
+  void earnExp(const int &exp);
   void increaseAttribute(Constants::AttributeType attributeType);
   void handleEnemyHit(const int &damage);
-  void lookToMouse(const sf::Vector2f& mousePos);
+  void lookToMouse(const sf::Vector2f &mousePos);
+
+  void changeState(PlayerState state);
+  void changeAnimation(Animation &animation, bool wait = true);
 
   void updatePlayerPosition(const float dt);
-  void updateBullet(const float dt, std::vector<Bullet*>& bullets);
+  void updateBullet(const float dt, std::vector<Bullet *> &bullets);
+  void updateAnimation();
 
-  virtual void update(const float dt, sf::Vector2f mousePos, std::vector<Bullet*>& bullets);
-  virtual void render(sf::RenderTarget& target);
+  virtual void update(const float dt, sf::Vector2f mousePos, std::vector<Bullet *> &bullets);
+  virtual void render(sf::RenderTarget &target);
 };
 
 #endif

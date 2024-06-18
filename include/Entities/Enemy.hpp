@@ -2,10 +2,13 @@
 #define ENEMY_HPP
 
 #include "Entities/Entity.hpp"
+#include "System/Animation.hpp"
 
 class Enemy : public Entity
 {
 private:
+  Animation* animation;
+
   int exp; // how much experience it is worth when killed
   int damage;
   
@@ -13,8 +16,6 @@ private:
   sf::Clock attackTimer;
   
   void initVariables();
-
-  void updateEnemyPosition();
 
 public:
   Enemy(sf::Vector2f pos);

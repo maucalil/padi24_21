@@ -40,12 +40,22 @@ public:
   static constexpr int DefaultPlayerExpNextLvl = 20;
   static constexpr float DefaultPlayerMovSpeed = 150.f;
 
+  static constexpr unsigned PlayerIdleFrameWidth = 313;
+  static constexpr unsigned PlayerIdleFrameHeight = 207;
+  static constexpr unsigned PlayerIdleNumFrames = 20;
+  static constexpr float PlayerIdleTimePerFrame = .1f;
+
   // Enemy
   static constexpr int DefaultEnemyDamage = 10;
   static constexpr int DefaultEnemyHealth = 20;
   static constexpr int DefaultEnemyExp = 5;
   static constexpr float DefaultEnemyMovSpeed = 100.f;
   static constexpr float DefaultEnemyAttackSpeed = 1.f; // 1 attack per second
+
+  static constexpr unsigned EnemyMoveFrameWidth = 288;
+  static constexpr unsigned EnemyMoveFrameHeight = 311;
+  static constexpr unsigned EnemyMoveNumFrames = 17;
+  static constexpr float EnemyMoveTimePerFrame = .075f;
 
   // Wave
   static constexpr int DefaultWaveNumEnemies = 15;

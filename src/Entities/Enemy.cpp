@@ -13,8 +13,12 @@ Enemy::Enemy(sf::Vector2f pos)
 {
   initVariables();
 
-  sprite.setTexture(*ResourceManager::getTexture("enemy/enemy.png"));
-  sprite.setTextureRect(sf::IntRect(0, 0, 241, 222));
+  animation = new Animation(sprite, ResourceManager::getTexture("enemy/enemy_move.png"),
+                            sf::Vector2u(Constants::EnemyMoveFrameWidth, Constants::EnemyMoveFrameHeight),
+                            Constants::EnemyMoveNumFrames,
+                            Constants::EnemyMoveTimePerFrame);
+  animation->setRepeat(true);
+
   sprite.setOrigin(getCenter());
   sprite.setPosition(pos);
   sprite.scale(sf::Vector2f(.3f, .3f));
@@ -41,7 +45,8 @@ int Enemy::getDamage()
 
 bool Enemy::haveAttacked()
 {
-  if (attackTimer.getElapsedTime().asSeconds() >= attackSpeed) {
+  if (attackTimer.getElapsedTime().asSeconds() >= attackSpeed)
+  {
     attackTimer.restart();
     return true;
   }
@@ -57,6 +62,7 @@ void Enemy::update(const float dt, const sf::Vector2f target)
 
   float angle = Utils::GetAngle(direction);
   rotate(angle - sprite.getRotation());
+  animation->update(dt);
 }
 
 void Enemy::render(sf::RenderTarget &target)

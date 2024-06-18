@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
+#include "System/Animation.hpp"
 #include "System/ResourceManager.hpp"
 #include "System/Utils.hpp"
 #include "Constants.hpp"
@@ -13,6 +14,7 @@ class Entity
 {
 protected:
   sf::Sprite sprite;
+  Animation* currentAnimation;
 
   sf::Vector2f lastValidPosition;
 
