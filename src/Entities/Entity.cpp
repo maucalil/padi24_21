@@ -19,7 +19,7 @@ void Entity::rotate(const float &angle)
   sprite.rotate(angle);
 }
 
-void Entity::changeAnimation(Animation &animation, bool wait)
+void Entity::changeAnimation(Animation &animation)
 {
   currentAnimation = &animation;
   currentAnimation->restart();
