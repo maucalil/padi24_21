@@ -19,6 +19,12 @@ void Entity::rotate(const float &angle)
   sprite.rotate(angle);
 }
 
+void Entity::changeAnimation(Animation &animation, bool wait)
+{
+  currentAnimation = &animation;
+  currentAnimation->restart();
+}
+
 sf::Sprite Entity::getSprite()
 {
   return sprite;

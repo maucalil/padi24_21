@@ -106,12 +106,14 @@ bool GameState::didEnemyCollide(Enemy *enemy, int enemyId)
   // If enemy collides with player
   if (Collision::PixelPerfectTest(enemy->getSprite(), player->getSprite()))
   {
+    enemy->setIsAttacking(true);
     if (enemy->haveAttacked())
       player->handleEnemyHit(enemy->getDamage());
 
     return true;
   }
 
+  enemy->setIsAttacking(false);
   return false;
 }
 

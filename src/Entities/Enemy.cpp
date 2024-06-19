@@ -9,16 +9,52 @@ void Enemy::initVariables()
   movSpeed = Constants::DefaultEnemyMovSpeed;
 }
 
+void Enemy::initAnimations()
+{
+  Animation *moveAnimation = new Animation(sprite, sf::Vector2u(Constants::EnemyMoveTextureWidth, Constants::EnemyMoveTextureHeight),
+                                           sf::Vector2u(Constants::EnemyMoveFrameWidth, Constants::EnemyMoveFrameHeight),
+                                           Constants::EnemyMoveNumFrames,
+                                           Constants::EnemyMoveTimePerFrame);
+  moveAnimation->setRepeat(true);
+  animations[EnemyState::MOVING] = moveAnimation;
+
+  Animation *attackAnimation = new Animation(sprite, sf::Vector2u(Constants::EnemyAttackTextureWidth, Constants::EnemyAttackTextureHeight),
+                                             sf::Vector2u(Constants::EnemyAttackFrameWidth, Constants::EnemyAttackFrameHeight),
+                                             Constants::EnemyAttackNumFrames,
+                                             Constants::EnemyAttackTimePerFrame);
+  attackAnimation->setRepeat(true);
+  animations[EnemyState::ATTACKING] = attackAnimation;
+
+  sprite.setTexture(*ResourceManager::getTexture("enemy/enemy_move.png"));
+  changeAnimation(*animations[EnemyState::MOVING]);
+}
+
+void Enemy::updateAnimation()
+{
+  if (enemyState == ATTACKING && !(lastState == ATTACKING))
+  {
+      sprite.setTexture(*ResourceManager::getTexture("enemy/enemy_attack.png"));
+      changeAnimation(*animations[EnemyState::ATTACKING]);
+      std::cout << "attacking\n";
+  }
+  else if (enemyState == MOVING && !(lastState == MOVING))
+  {
+      sprite.setTexture(*ResourceManager::getTexture("enemy/enemy_move.png"));
+      changeAnimation(*animations[EnemyState::MOVING]);
+      std::cout << "moving\n";
+  }
+}
+
+void Enemy::changeState(EnemyState state)
+{
+  lastState = enemyState;
+  enemyState = state;
+}
+
 Enemy::Enemy(sf::Vector2f pos)
 {
   initVariables();
-
-  sprite.setTexture(*ResourceManager::getTexture("enemy/enemy_move.png"));
-  animation = new Animation(sprite, sf::Vector2u(Constants::EnemyMoveTextureWidth, Constants::EnemyMoveTextureHeight),
-                            sf::Vector2u(Constants::EnemyMoveFrameWidth, Constants::EnemyMoveFrameHeight),
-                            Constants::EnemyMoveNumFrames,
-                            Constants::EnemyMoveTimePerFrame);
-  animation->setRepeat(true);
+  initAnimations();
 
   sprite.setOrigin(getCenter());
   sprite.setPosition(pos);
@@ -46,13 +82,22 @@ int Enemy::getDamage()
 
 bool Enemy::haveAttacked()
 {
-  if (attackTimer.getElapsedTime().asSeconds() >= attackSpeed)
+  if (isAttacking && attackTimer.getElapsedTime().asSeconds() >= attackSpeed)
   {
     attackTimer.restart();
     return true;
   }
 
   return false;
+}
+
+void Enemy::setIsAttacking(bool isAttacking)
+{
+  this->isAttacking = isAttacking;
+  if (isAttacking)
+    changeState(EnemyState::ATTACKING);
+  else
+    changeState(EnemyState::MOVING);
 }
 
 void Enemy::update(const float dt, const sf::Vector2f target)
@@ -63,10 +108,16 @@ void Enemy::update(const float dt, const sf::Vector2f target)
 
   float angle = Utils::GetAngle(direction);
   rotate(angle - sprite.getRotation());
-  animation->update(dt);
+
+  updateAnimation();
+  currentAnimation->update(dt);
 }
 
 void Enemy::render(sf::RenderTarget &target)
 {
   target.draw(sprite);
+  sf::Text text;
+  text.setFont(*ResourceManager::getFont("fonts/arial.ttf"));
+  text.setString(std::to_string(enemyState));
+  target.draw(text);
 }

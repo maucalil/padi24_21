@@ -150,12 +150,6 @@ void Player::changeState(PlayerState state)
   playerState = state;
 }
 
-void Player::changeAnimation(Animation &animation, bool wait)
-{
-  currentAnimation = &animation;
-  // currentAnimation->restart();
-}
-
 void Player::updatePlayerPosition(const float dt)
 {
   lastValidPosition = getPosition();
@@ -211,7 +205,6 @@ void Player::updateAnimation()
     {
       sprite.setTexture(*ResourceManager::getTexture("player/player_shoot.png"));
       changeAnimation(*animations[PlayerState::SHOOTING]);
-      std::cout << "ok1\n";
     }
   }
   else if (playerState == MOVING)
@@ -220,7 +213,6 @@ void Player::updateAnimation()
     {
       sprite.setTexture(*ResourceManager::getTexture("player/player_move.png"));
       changeAnimation(*animations[PlayerState::MOVING]);
-      std::cout << "ok2\n";
     }
   }
   else
@@ -229,7 +221,6 @@ void Player::updateAnimation()
     {
       sprite.setTexture(*ResourceManager::getTexture("player/player_idle.png"));
       changeAnimation(*animations[PlayerState::IDLE]);
-      std::cout << "ok3\n";
     }
   }
 }
@@ -251,8 +242,4 @@ void Player::update(const float dt, sf::Vector2f mousePos, std::vector<Bullet *>
 void Player::render(sf::RenderTarget &target)
 {
   target.draw(sprite);
-  sf::Text text;
-  text.setFont(*ResourceManager::getFont("fonts/arial.ttf"));
-  text.setString(std::to_string(playerState));
-  target.draw(text);
 }

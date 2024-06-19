@@ -50,7 +50,6 @@ public:
   void lookToMouse(const sf::Vector2f &mousePos);
 
   void changeState(PlayerState state);
-  void changeAnimation(Animation &animation, bool wait = true);
 
   void updatePlayerPosition(const float dt);
   void updateBullet(const float dt, std::vector<Bullet *> &bullets);

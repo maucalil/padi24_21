@@ -75,6 +75,13 @@ public:
   static constexpr unsigned EnemyMoveNumFrames = 17;
   static constexpr float EnemyMoveTimePerFrame = .075f;
 
+  static constexpr unsigned EnemyAttackTextureWidth = 954;
+  static constexpr unsigned EnemyAttackTextureHeight = 882;
+  static constexpr unsigned EnemyAttackFrameWidth = 318;
+  static constexpr unsigned EnemyAttackFrameHeight = 294;
+  static constexpr unsigned EnemyAttackNumFrames = 9;
+  static constexpr float EnemyAttackTimePerFrame = .12f;
+
   // Wave
   static constexpr int DefaultWaveNumEnemies = 15;
 

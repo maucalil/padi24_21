@@ -34,6 +34,7 @@ public:
 
   void handleCollision();
   void rotate(const float &angle);
+  void changeAnimation(Animation &animation);
 
   void update(const float dt, sf::Window *window);
   virtual void render(sf::RenderTarget &target) = 0;
