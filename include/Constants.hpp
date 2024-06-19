@@ -40,10 +40,26 @@ public:
   static constexpr int DefaultPlayerExpNextLvl = 20;
   static constexpr float DefaultPlayerMovSpeed = 150.f;
 
+  static constexpr unsigned PlayerIdleTextureWidth = 1252;
+  static constexpr unsigned PlayerIdleTextureHeight = 1035;
   static constexpr unsigned PlayerIdleFrameWidth = 313;
   static constexpr unsigned PlayerIdleFrameHeight = 207;
   static constexpr unsigned PlayerIdleNumFrames = 20;
   static constexpr float PlayerIdleTimePerFrame = .1f;
+
+  static constexpr unsigned PlayerMoveTextureWidth = 1252;
+  static constexpr unsigned PlayerMoveTextureHeight = 1030;
+  static constexpr unsigned PlayerMoveFrameWidth = 313;
+  static constexpr unsigned PlayerMoveFrameHeight = 206;
+  static constexpr unsigned PlayerMoveNumFrames = 20;
+  static constexpr float PlayerMoveTimePerFrame = .1f;
+
+  static constexpr unsigned PlayerShootTextureWidth = 936;
+  static constexpr unsigned PlayerShootTextureHeight = 206;
+  static constexpr unsigned PlayerShootFrameWidth = 312;
+  static constexpr unsigned PlayerShootFrameHeight = 206;
+  static constexpr unsigned PlayerShootNumFrames = 3;
+  static constexpr float PlayerShootTimePerFrame = .15f;
 
   // Enemy
   static constexpr int DefaultEnemyDamage = 10;
@@ -52,6 +68,8 @@ public:
   static constexpr float DefaultEnemyMovSpeed = 100.f;
   static constexpr float DefaultEnemyAttackSpeed = 1.f; // 1 attack per second
 
+  static constexpr unsigned EnemyMoveTextureWidth = 1152;
+  static constexpr unsigned EnemyMoveTextureHeight = 1555;
   static constexpr unsigned EnemyMoveFrameWidth = 288;
   static constexpr unsigned EnemyMoveFrameHeight = 311;
   static constexpr unsigned EnemyMoveNumFrames = 17;

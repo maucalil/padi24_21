@@ -21,13 +21,13 @@ private:
   bool repeat;
 
 public:
-  Animation(sf::Sprite& sprite, sf::Texture* texture, sf::Vector2u frameSize, unsigned numFrames, float switchTime);
+  Animation(sf::Sprite& sprite, sf::Vector2u textureBounds, sf::Vector2u frameSize, unsigned numFrames, float switchTime);
   ~Animation();
 
   void setRepeat(bool repeat);
-  
+
+  void restart();
   void update(const float dt);
-  void render(sf::RenderTarget &target);
 };
 
 #endif

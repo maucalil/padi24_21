@@ -1,4 +1,5 @@
 #include "System/ResourceManager.hpp"
+
 ResourceManager *ResourceManager::instance = nullptr;
 
 ResourceManager::ResourceManager()

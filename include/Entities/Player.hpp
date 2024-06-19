@@ -15,6 +15,7 @@ private:
     SHOOTING,
   };
   PlayerState playerState;
+  PlayerState lastState;
   bool isShooting;
 
   std::map<PlayerState, Animation*> animations;

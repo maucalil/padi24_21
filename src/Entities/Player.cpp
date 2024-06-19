@@ -15,16 +15,34 @@ void Player::initVariables()
   levelUpPoints = 0;
 
   isShooting = false;
+  playerState = IDLE;
 }
 
 void Player::initAnimations()
 {
-  Animation *idleAnimation = new Animation(sprite, ResourceManager::getTexture("player/player_idle.png"),
-                            sf::Vector2u(Constants::PlayerIdleFrameWidth, Constants::PlayerIdleFrameHeight),
-                            Constants::PlayerIdleNumFrames,
-                            Constants::PlayerIdleTimePerFrame);
+  Animation *idleAnimation = new Animation(sprite, sf::Vector2u(Constants::PlayerIdleTextureWidth, Constants::PlayerIdleTextureHeight),
+                                           sf::Vector2u(Constants::PlayerIdleFrameWidth, Constants::PlayerIdleFrameHeight),
+                                           Constants::PlayerIdleNumFrames,
+                                           Constants::PlayerIdleTimePerFrame);
   idleAnimation->setRepeat(true);
   animations[PlayerState::IDLE] = idleAnimation;
+
+  Animation *moveAnimation = new Animation(sprite, sf::Vector2u(Constants::PlayerMoveTextureWidth, Constants::PlayerMoveTextureHeight),
+                                           sf::Vector2u(Constants::PlayerMoveFrameWidth, Constants::PlayerMoveFrameHeight),
+                                           Constants::PlayerMoveNumFrames,
+                                           Constants::PlayerMoveTimePerFrame);
+  moveAnimation->setRepeat(true);
+  animations[PlayerState::MOVING] = moveAnimation;
+
+  Animation *shootAnimation = new Animation(sprite, sf::Vector2u(Constants::PlayerShootTextureWidth, Constants::PlayerShootTextureHeight),
+                                            sf::Vector2u(Constants::PlayerShootFrameWidth, Constants::PlayerShootFrameHeight),
+                                            Constants::PlayerShootNumFrames,
+                                            Constants::PlayerShootTimePerFrame);
+  shootAnimation->setRepeat(true);
+  animations[PlayerState::SHOOTING] = shootAnimation;
+
+  sprite.setTexture(*ResourceManager::getTexture("player/player_idle.png"));
+  changeAnimation(*animations[PlayerState::IDLE]);
 }
 
 void Player::levelUp()
@@ -40,8 +58,6 @@ Player::Player(sf::Vector2f pos)
 {
   initVariables();
   initAnimations();
-
-  changeAnimation(*animations[PlayerState::IDLE]);
 
   sprite.setOrigin(getCenter());
   sprite.setPosition(pos);
@@ -137,6 +153,7 @@ void Player::changeState(PlayerState state)
 void Player::changeAnimation(Animation &animation, bool wait)
 {
   currentAnimation = &animation;
+  // currentAnimation->restart();
 }
 
 void Player::updatePlayerPosition(const float dt)
@@ -163,9 +180,13 @@ void Player::updatePlayerPosition(const float dt)
   }
 
   if (dir != sf::Vector2f(0.f, 0.f))
+  {
     changeState(PlayerState::MOVING);
+  }
   else
+  {
     changeState(PlayerState::IDLE);
+  }
 
   move(dt, dir);
 }
@@ -177,7 +198,6 @@ void Player::updateBullet(const float dt, std::vector<Bullet *> &bullets)
   if (isShooting && fireRateTimer >= fireRate)
   {
     bullets.push_back(new Bullet(getPosition(), lookingDirection));
-    changeState(PlayerState::SHOOTING);
 
     fireRateTimer = 0;
   }
@@ -187,28 +207,52 @@ void Player::updateAnimation()
 {
   if (playerState == SHOOTING)
   {
-    // changeAnimation();
+    if (!(lastState == SHOOTING))
+    {
+      sprite.setTexture(*ResourceManager::getTexture("player/player_shoot.png"));
+      changeAnimation(*animations[PlayerState::SHOOTING]);
+      std::cout << "ok1\n";
+    }
   }
   else if (playerState == MOVING)
   {
-    // changeAnimation();
+    if (!(lastState == MOVING))
+    {
+      sprite.setTexture(*ResourceManager::getTexture("player/player_move.png"));
+      changeAnimation(*animations[PlayerState::MOVING]);
+      std::cout << "ok2\n";
+    }
   }
   else
   {
-    // changeAnimation();
+    if (!(lastState == IDLE))
+    {
+      sprite.setTexture(*ResourceManager::getTexture("player/player_idle.png"));
+      changeAnimation(*animations[PlayerState::IDLE]);
+      std::cout << "ok3\n";
+    }
   }
 }
 
 void Player::update(const float dt, sf::Vector2f mousePos, std::vector<Bullet *> &bullets)
 {
+  lastState = playerState;
   lookToMouse(mousePos);
   updatePlayerPosition(dt);
   updateBullet(dt, bullets);
 
+  if (isShooting)
+    changeState(PlayerState::SHOOTING);
+
+  updateAnimation();
   currentAnimation->update(dt);
 }
 
 void Player::render(sf::RenderTarget &target)
 {
   target.draw(sprite);
+  sf::Text text;
+  text.setFont(*ResourceManager::getFont("fonts/arial.ttf"));
+  text.setString(std::to_string(playerState));
+  target.draw(text);
 }

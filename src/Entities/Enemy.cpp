@@ -13,7 +13,8 @@ Enemy::Enemy(sf::Vector2f pos)
 {
   initVariables();
 
-  animation = new Animation(sprite, ResourceManager::getTexture("enemy/enemy_move.png"),
+  sprite.setTexture(*ResourceManager::getTexture("enemy/enemy_move.png"));
+  animation = new Animation(sprite, sf::Vector2u(Constants::EnemyMoveTextureWidth, Constants::EnemyMoveTextureHeight),
                             sf::Vector2u(Constants::EnemyMoveFrameWidth, Constants::EnemyMoveFrameHeight),
                             Constants::EnemyMoveNumFrames,
                             Constants::EnemyMoveTimePerFrame);
