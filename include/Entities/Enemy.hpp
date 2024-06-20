@@ -15,6 +15,7 @@ private:
   EnemyState enemyState;
   EnemyState lastState;
   bool isAttacking;
+  bool attacked;
 
   std::map<EnemyState, Animation*> animations;
   Animation* animation;

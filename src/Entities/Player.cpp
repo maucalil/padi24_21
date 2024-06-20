@@ -51,7 +51,6 @@ void Player::levelUp()
   levelUpPoints++;
   experience -= expNextLevel;
   expNextLevel += 2;
-  std::cout << "Leveled up! (" << level << ")\n";
 }
 
 Player::Player(sf::Vector2f pos)

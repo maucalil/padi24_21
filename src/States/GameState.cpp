@@ -113,7 +113,6 @@ bool GameState::didEnemyCollide(Enemy *enemy, int enemyId)
     return true;
   }
 
-  enemy->setIsAttacking(false);
   return false;
 }
 

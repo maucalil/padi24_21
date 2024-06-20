@@ -1,5 +1,4 @@
 #include "System/Animation.hpp"
-#include <iostream>
 
 Animation::Animation(sf::Sprite &sprite, sf::Vector2u textureBounds, sf::Vector2u frameSize, unsigned numFrames, float switchTime)
   : sprite(sprite), frameSize(frameSize), numFrames(numFrames), switchTime(switchTime)
@@ -47,8 +46,9 @@ void Animation::update(const float dt)
     {
       currentFrame = (currentFrame + 1) % numFrames;
 
-      if (currentFrame == 0)
+      if (currentFrame == 0) {
         textureRect = sf::IntRect(0, 0, frameSize.x, frameSize.y);
+      }
     }
     else
     {

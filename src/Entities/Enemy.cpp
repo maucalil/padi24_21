@@ -35,13 +35,11 @@ void Enemy::updateAnimation()
   {
       sprite.setTexture(*ResourceManager::getTexture("enemy/enemy_attack.png"));
       changeAnimation(*animations[EnemyState::ATTACKING]);
-      std::cout << "attacking\n";
   }
   else if (enemyState == MOVING && !(lastState == MOVING))
   {
       sprite.setTexture(*ResourceManager::getTexture("enemy/enemy_move.png"));
       changeAnimation(*animations[EnemyState::MOVING]);
-      std::cout << "moving\n";
   }
 }
 
@@ -82,22 +80,12 @@ int Enemy::getDamage()
 
 bool Enemy::haveAttacked()
 {
-  if (isAttacking && attackTimer.getElapsedTime().asSeconds() >= attackSpeed)
-  {
-    attackTimer.restart();
-    return true;
-  }
-
-  return false;
+  return attacked;
 }
 
 void Enemy::setIsAttacking(bool isAttacking)
 {
   this->isAttacking = isAttacking;
-  if (isAttacking)
-    changeState(EnemyState::ATTACKING);
-  else
-    changeState(EnemyState::MOVING);
 }
 
 void Enemy::update(const float dt, const sf::Vector2f target)
@@ -108,6 +96,20 @@ void Enemy::update(const float dt, const sf::Vector2f target)
 
   float angle = Utils::GetAngle(direction);
   rotate(angle - sprite.getRotation());
+
+  if (isAttacking && attackTimer.getElapsedTime().asSeconds() >= attackSpeed)
+  {
+    isAttacking = false;
+    attackTimer.restart();
+    attacked = true;
+  } else {
+    attacked = false;
+  }
+
+  if (isAttacking)
+    changeState(EnemyState::ATTACKING);
+  else
+    changeState(EnemyState::MOVING);
 
   updateAnimation();
   currentAnimation->update(dt);
