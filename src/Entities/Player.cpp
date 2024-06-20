@@ -135,6 +135,8 @@ void Player::increaseAttribute(Constants::AttributeType attributeType)
 void Player::handleEnemyHit(const int &damage)
 {
   health -= damage;
+  if (health < 0)
+    health = 0;
 }
 
 void Player::lookToMouse(const sf::Vector2f &mousePos)

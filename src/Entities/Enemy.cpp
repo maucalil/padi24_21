@@ -118,8 +118,4 @@ void Enemy::update(const float dt, const sf::Vector2f target)
 void Enemy::render(sf::RenderTarget &target)
 {
   target.draw(sprite);
-  sf::Text text;
-  text.setFont(*ResourceManager::getFont("fonts/arial.ttf"));
-  text.setString(std::to_string(enemyState));
-  target.draw(text);
 }
