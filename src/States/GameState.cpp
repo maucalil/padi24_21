@@ -93,6 +93,12 @@ bool GameState::didPlayerCollide()
   // If player collides with window borders
   if (checkWindowCollision(player->getSprite()))
     return true;
+  
+  sf::Vector2u playerMapPos = map->getPositionOnMap(sf::Vector2u(player->getPosition()));
+  Tile tile = map->getTileAtPosition(playerMapPos);
+  if (tile.hasCollision()) {
+    return true;
+  }
 
   return false;
 }
@@ -110,6 +116,12 @@ bool GameState::didEnemyCollide(Enemy *enemy, int enemyId)
     if (enemy->haveAttacked())
       player->handleEnemyHit(enemy->getDamage());
 
+    return true;
+  }
+
+  sf::Vector2u enemyMapPos = map->getPositionOnMap(sf::Vector2u(enemy->getPosition()));
+  Tile tile = map->getTileAtPosition(enemyMapPos);
+  if (tile.hasCollision()) {
     return true;
   }
 
@@ -201,7 +213,7 @@ void GameState::update(const float dt)
     }
   }
 
-  enemySpawner->update(dt, enemies);
+  enemySpawner->update(dt, enemies, map->getRandomWalkableTilePos());
   for (int i = 0; i < enemies.size(); i++)
   {
     enemies[i]->update(dt, player->getPosition());

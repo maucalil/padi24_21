@@ -23,13 +23,6 @@ public:
     MOV_SPEED_MAX = 500,
   };
 
-  // Map
-  static const unsigned TileWidth = 128;  // pixels
-  static const unsigned TileHeight = 128; // pixels
-  static const unsigned MapWidth = 15;
-  static const unsigned MapHeight = 9;
-  static const unsigned NumPossibleEnemyPos = 8;
-
   // Bullet
   static constexpr float DefaultBulletSpeed = 500.f;
 
@@ -86,6 +79,79 @@ public:
   static constexpr int DefaultWaveNumEnemies = 15;
 
   static sf::Vector2f GetEnemySpawnPosition(int number);
+
+  // Map
+  static const unsigned TileWidth = 128;  // pixels
+  static const unsigned TileHeight = 128; // pixels
+  static const unsigned MapWidth = 15;
+  static const unsigned MapHeight = 9;
+  static const unsigned NumPossibleEnemyPos = 8;
+
+  enum TileNumber
+  {
+    Sand,
+    Beach_T_Grass_1,
+    Beach_T_1,
+    Beach_T_Grass_2,
+    Beach_T_2,
+    Beach_TL_Grass_1,
+    Beach_TL_1,
+    Beach_R_Grass_1,
+    Grass,
+    Beach_R_1,
+    Beach_R_2,
+    Beach_R_Grass_2,
+    Beach_R_Grass_3,
+    Beach_R_3,
+    Beach_BR_Grass_1,
+    Beach_BR_1,
+    Beach_TR_Grass_1,
+    Beach_R_Grass_4,
+    Beach_TR_Grass_2,
+    Beach_L_Grass_1,
+    Beach_L_1,
+    Beach_L_Grass_2,
+    Beach_L_2,
+    Beach_L_Grass_3,
+    Beach_TR_1,
+    Beach_R_4,
+    Beach_TR_2,
+    Beach_L_3,
+    Beach_TL_Grass_2,
+    Beach_TL_2,
+    Beach_BR_Grass_2,
+    Beach_BR_2,
+    Beach_T_Grass_3,
+    Beach_R_Grass_5,
+    Beach_TR_Grass_3,
+    Beach_L_Grass_4,
+    Beach_B_Grass_1,
+    Beach_B_Grass_2,
+    Beach_B_1,
+    Beach_B_Grass_3,
+    Beach_T_4,
+    Beach_R_5,
+    Beach_TR_3,
+    Beach_L_4,
+    Beach_B_2,
+    Beach_B_3,
+    Beach_BL_Grass_1,
+    Beach_BL_1,
+    Beach_T_Grass_4,
+    Beach_R_Grass_6,
+    Beach_BR_Grass_3,
+    Beach_TL_Grass_3,
+    Beach_B_Grass_4,
+    Beach_B_Grass_5,
+    Water,
+    Null_1,
+    Beach_T_5,
+    Beach_R_6,
+    Beach_BR_3,
+    Beach_TL_3,
+    Beach_B_4,
+    Beach_B_5,
+  };
 };
 
 #endif

@@ -2,7 +2,6 @@
 
 EnemySpawner::EnemySpawner()
 {
-  srand(time(0));
   timeToSpawn = 0.25f;
   timer = 0.f;
 
@@ -47,12 +46,11 @@ void EnemySpawner::handleEnemyKilled()
   remainingEnemies--;
 }
 
-void EnemySpawner::update(const float dt, std::vector<Enemy *> &enemies)
+void EnemySpawner::update(const float dt, std::vector<Enemy *> &enemies, sf::Vector2f pos)
 {
   timer += dt;
   if (canSpawn && timer >= timeToSpawn && numEnemiesSpawned < waveNumEnemies)
   {
-    sf::Vector2f pos = Constants::GetEnemySpawnPosition(rand() % Constants::NumPossibleEnemyPos);
     enemies.push_back(new Enemy(pos));
 
     numEnemiesSpawned++;

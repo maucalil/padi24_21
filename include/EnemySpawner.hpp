@@ -31,7 +31,7 @@ public:
   void startSpawning();
   void handleEnemyKilled();
 
-  void update(const float dt, std::vector<Enemy *> &enemies);
+  void update(const float dt, std::vector<Enemy *> &enemies, sf::Vector2f pos);
 };
 
 #endif
