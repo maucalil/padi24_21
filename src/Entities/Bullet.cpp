@@ -6,7 +6,7 @@ Bullet::Bullet(const sf::Vector2f& position, const sf::Vector2f& dir)
   sprite.setTextureRect(sf::IntRect(28, 52, 166, 35));
   sprite.setOrigin(getCenter());
   sprite.setPosition(position);
-  sprite.scale(sf::Vector2f(0.3f, 0.3f));
+  sprite.scale(sf::Vector2f(0.22f, 0.22f));
   
   direction = dir;
   movSpeed = Constants::DefaultBulletSpeed;

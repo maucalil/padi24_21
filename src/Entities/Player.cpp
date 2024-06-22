@@ -94,6 +94,21 @@ std::vector<std::string> Player::getAttributesMap()
   return attributesMap;
 }
 
+sf::Vector2f Player::getWeaponPos()
+{
+  sf::Vector2f center = getPosition();
+  float rotation = sprite.getRotation();
+  float rotationRad = rotation * (M_PI / 180.0);
+
+  float offsetX = 50.f;
+  float offsetY = 20.f;
+
+  float newX = center.x + offsetX * cos(rotationRad) - offsetY * sin(rotationRad);
+  float newY = center.y + offsetX * sin(rotationRad) + offsetY * cos(rotationRad);
+
+  return sf::Vector2f(newX, newY);
+}
+
 void Player::earnExp(const int &exp)
 {
   experience += exp;
@@ -192,7 +207,7 @@ void Player::updateBullet(const float dt, std::vector<Bullet *> &bullets)
   fireRateTimer += dt;
   if (isShooting && fireRateTimer >= fireRate)
   {
-    bullets.push_back(new Bullet(getPosition(), lookingDirection));
+    bullets.push_back(new Bullet(getWeaponPos(), lookingDirection));
 
     fireRateTimer = 0;
   }

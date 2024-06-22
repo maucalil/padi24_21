@@ -4,6 +4,7 @@
 #include "Entities/Entity.hpp"
 #include "Entities/Bullet.hpp"
 #include "System/Animation.hpp"
+#include <cmath>
 
 class Player : public Entity
 {
@@ -43,6 +44,7 @@ public:
   int getExp();
   int getExpNextLevel();
   std::vector<std::string> getAttributesMap();
+  sf::Vector2f getWeaponPos();
 
   void earnExp(const int &exp);
   void increaseAttribute(Constants::AttributeType attributeType);
