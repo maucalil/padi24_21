@@ -188,10 +188,6 @@ void GameState::handleEvent(const sf::Event &event)
     {
       player->increaseAttribute(Constants::HEALTH);
     }
-    else if (event.key.code == sf::Keyboard::Num4)
-    {
-      player->increaseAttribute(Constants::MOV_SPEED);
-    }
     else if (!enemySpawner->isSpawning() && event.key.code == sf::Keyboard::R) {
       enemySpawner->startSpawning();
     } else if (paused) {

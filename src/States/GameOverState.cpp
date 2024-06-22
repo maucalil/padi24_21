@@ -18,7 +18,7 @@ GameOverState::GameOverState(sf::RenderWindow *window, std::stack<State *> *stat
   infoText.setFont(*ResourceManager::getFont("fonts/arial.ttf"));
   infoText.setFillColor(sf::Color(200, 0, 0, 230));
   infoText.setCharacterSize(20);
-  infoText.setString("Press any key to return to the main menu");
+  infoText.setString("Press ESC to return to the main menu");
   sf::FloatRect infoTextBounds = infoText.getGlobalBounds();
   infoText.setOrigin(infoTextBounds.left + infoTextBounds.width / 2, infoTextBounds.top + infoTextBounds.height / 2);
   infoText.setPosition(windowSize.x / 2.f, windowSize.y / 2.f + 30.f);
@@ -30,10 +30,11 @@ GameOverState::~GameOverState()
 
 void GameOverState::handleEvent(const sf::Event &event)
 {
-    switch (event.type)
+  switch (event.type)
   {
   case sf::Event::KeyPressed:
-    changeState(new MainMenuState(window, states));
+    if (event.key.code == sf::Keyboard::Escape)
+      changeState(new MainMenuState(window, states));
     break;
 
   default:

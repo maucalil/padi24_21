@@ -51,7 +51,7 @@ void EnemySpawner::update(const float dt, std::vector<Enemy *> &enemies, sf::Vec
   timer += dt;
   if (canSpawn && timer >= timeToSpawn && numEnemiesSpawned < waveNumEnemies)
   {
-    enemies.push_back(new Enemy(pos));
+    enemies.push_back(new Enemy(pos, wave));
 
     numEnemiesSpawned++;
     timer = 0;

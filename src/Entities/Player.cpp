@@ -12,7 +12,7 @@ void Player::initVariables()
   experience = 0;
   fireRateTimer = 0;
   level = 1;
-  levelUpPoints = 0;
+  levelUpPoints = 100;
 
   isShooting = false;
   playerState = IDLE;
@@ -50,7 +50,7 @@ void Player::levelUp()
   level++;
   levelUpPoints++;
   experience -= expNextLevel;
-  expNextLevel += 2;
+  expNextLevel = static_cast<int>(Constants::DefaultPlayerExpNextLvl * pow(level, 1.15));
 }
 
 Player::Player(sf::Vector2f pos)
@@ -124,20 +124,16 @@ void Player::increaseAttribute(Constants::AttributeType attributeType)
   switch (attributeType)
   {
   case Constants::AttributeType::DAMAGE:
-    damage += 5;
+    damage += static_cast<int>(damage * 0.1);
     break;
 
   case Constants::AttributeType::ATK_SPEED:
-    fireRate -= .025f;
+    fireRate *= 0.98f; // decreases by 2%
     break;
 
   case Constants::AttributeType::HEALTH:
-    maxHealth += 5;
+    maxHealth += static_cast<int>(health * 0.1);
     health = maxHealth;
-    break;
-
-  case Constants::AttributeType::MOV_SPEED:
-    movSpeed += 10.f;
     break;
 
   default:

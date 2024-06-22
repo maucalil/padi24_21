@@ -6,6 +6,7 @@ void Enemy::initVariables()
   damage = Constants::DefaultEnemyDamage;
   exp = Constants::DefaultEnemyExp;
   health = Constants::DefaultEnemyHealth;
+  maxHealth = health;
   movSpeed = Constants::DefaultEnemyMovSpeed;
 }
 
@@ -33,13 +34,13 @@ void Enemy::updateAnimation()
 {
   if (enemyState == ATTACKING && !(lastState == ATTACKING))
   {
-      sprite.setTexture(*ResourceManager::getTexture("enemy/enemy_attack.png"));
-      changeAnimation(*animations[EnemyState::ATTACKING]);
+    sprite.setTexture(*ResourceManager::getTexture("enemy/enemy_attack.png"));
+    changeAnimation(*animations[EnemyState::ATTACKING]);
   }
   else if (enemyState == MOVING && !(lastState == MOVING))
   {
-      sprite.setTexture(*ResourceManager::getTexture("enemy/enemy_move.png"));
-      changeAnimation(*animations[EnemyState::MOVING]);
+    sprite.setTexture(*ResourceManager::getTexture("enemy/enemy_move.png"));
+    changeAnimation(*animations[EnemyState::MOVING]);
   }
 }
 
@@ -49,7 +50,7 @@ void Enemy::changeState(EnemyState state)
   enemyState = state;
 }
 
-Enemy::Enemy(sf::Vector2f pos)
+Enemy::Enemy(sf::Vector2f pos, int waveLevel)
 {
   initVariables();
   initAnimations();
@@ -57,6 +58,11 @@ Enemy::Enemy(sf::Vector2f pos)
   sprite.setOrigin(getCenter());
   sprite.setPosition(pos);
   sprite.scale(sf::Vector2f(.3f, .3f));
+
+  maxHealth += static_cast<int>(Constants::DefaultEnemyHealth * (waveLevel - 1) * 0.08);
+  health = maxHealth;
+  damage += static_cast<int>(Constants::DefaultEnemyDamage * (waveLevel - 1) * 0.05);
+  exp += static_cast<int>(Constants::DefaultEnemyExp * pow((waveLevel - 1), 1.1));
 }
 
 Enemy::~Enemy()
@@ -102,7 +108,9 @@ void Enemy::update(const float dt, const sf::Vector2f target)
     isAttacking = false;
     attackTimer.restart();
     attacked = true;
-  } else {
+  }
+  else
+  {
     attacked = false;
   }
 

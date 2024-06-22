@@ -34,7 +34,7 @@ private:
   void changeState(EnemyState state);
 
 public:
-  Enemy(sf::Vector2f pos);
+  Enemy(sf::Vector2f pos, int waveLevel);
   ~Enemy();
 
   void handleBulletHit(const int &damage);
