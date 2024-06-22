@@ -35,8 +35,7 @@ void MainMenuState::updateOptionText()
   options[optionIndex].setFillColor(sf::Color::Blue);
 }
 
-MainMenuState::MainMenuState(sf::RenderWindow *window, std::stack<State *> *states)
-    : State(window, states)
+void MainMenuState::initGUI()
 {
   sf::Vector2f windowSize = window->getView().getSize();
 
@@ -60,6 +59,24 @@ MainMenuState::MainMenuState(sf::RenderWindow *window, std::stack<State *> *stat
   addOption("Play");
   addOption("Quit");
   updateOptionText();
+}
+
+void MainMenuState::initSounds()
+{
+  // Load a music to play
+  backgroundMusic.openFromFile("../resources/sounds/main_menu_background.ogg");
+
+  // Play the backgroundMusic
+  backgroundMusic.play();
+  backgroundMusic.setVolume(50);
+  backgroundMusic.setLoop(true);
+}
+
+MainMenuState::MainMenuState(sf::RenderWindow *window, std::stack<State *> *states)
+    : State(window, states)
+{
+  initGUI();
+  initSounds();
 }
 
 MainMenuState::~MainMenuState()
@@ -98,6 +115,7 @@ void MainMenuState::handleEvent(const sf::Event &event)
       if (optionIndex == Play)
       {
         changeState(new GameState(window, states));
+        backgroundMusic.~Music();
       }
       else if (optionIndex == Exit)
       {

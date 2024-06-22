@@ -26,7 +26,6 @@ The goal of the game is to survive for as long as possible against increasing wa
 
 ## TODO
 
-- Create pause menu
 - Balance progression
 - Update map
 
@@ -46,3 +45,4 @@ The goal of the game is to survive for as long as possible against increasing wa
 - Create animations
 - Collision with map
 - Create game over state
+- Create pause menu

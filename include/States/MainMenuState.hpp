@@ -18,9 +18,13 @@ private:
   std::size_t optionIndex;
 
   sf::Sprite background;
+  sf::Music backgroundMusic;
 
   void addOption(std::string optionName);
   void updateOptionText();
+
+  void initGUI();
+  void initSounds();
 
 public:
   MainMenuState(sf::RenderWindow *window, std::stack<State *> *states);

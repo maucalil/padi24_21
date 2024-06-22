@@ -3,18 +3,7 @@
 
 int main()
 {
-  Game game;
-
-  // Load a music to play
-  sf::Music music;
-  if (!music.openFromFile("../resources/sounds/nice_music.ogg"))
-    return EXIT_FAILURE;
-
-  // Play the music
-  music.play();
-  music.setVolume(0);
-  music.setLoop(true);
-  
+  Game game;  
   game.run();
 
   return 0;
