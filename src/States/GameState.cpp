@@ -113,8 +113,12 @@ bool GameState::didEnemyCollide(Enemy *enemy, int enemyId)
   if (Collision::PixelPerfectTest(enemy->getSprite(), player->getSprite()))
   {
     enemy->setIsAttacking(true);
-    if (enemy->haveAttacked())
+    if (enemy->haveAttacked()) {
       player->handleEnemyHit(enemy->getDamage());
+      if (player->isDead()) {
+        changeState(new GameOverState(window, states));
+      }
+    }
 
     return true;
   }
@@ -163,7 +167,7 @@ void GameState::handleEvent(const sf::Event &event)
   case sf::Event::KeyReleased:
     if (event.key.code == sf::Keyboard::Escape)
     {
-      window->close();
+      quit = true;
     }
     else if (event.key.code == sf::Keyboard::Num1)
     {

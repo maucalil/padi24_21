@@ -97,7 +97,7 @@ void MainMenuState::handleEvent(const sf::Event &event)
     {
       if (optionIndex == Play)
       {
-        states->push(new GameState(window, states));
+        changeState(new GameState(window, states));
       }
       else if (optionIndex == Exit)
       {

@@ -6,6 +6,7 @@
 #include "GUI/Button.hpp"
 #include "GUI/PlayerGUI.hpp"
 #include "States/State.hpp"
+#include "States/GameOverState.hpp"
 #include "World/Map.hpp"
 #include "System/Collision.hpp"
 

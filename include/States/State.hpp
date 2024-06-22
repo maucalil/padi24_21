@@ -13,6 +13,8 @@ protected:
   std::stack<State *> *states;
   bool quit;
 
+  void changeState(State* newState);
+
 public:
   State(sf::RenderWindow *window, std::stack<State *> *states);
   virtual ~State();
