@@ -5,6 +5,7 @@
 // #include "Entities/Player.hpp"
 #include "GUI/Button.hpp"
 #include "GUI/PlayerGUI.hpp"
+#include "GUI/PauseMenu.hpp"
 #include "States/State.hpp"
 #include "States/GameOverState.hpp"
 #include "World/Map.hpp"
@@ -24,11 +25,15 @@ private:
   // GUI
   PlayerGUI *playerGUI;
   sf::Text waveInfo;
+  PauseMenu* pauseMenu;
+  bool paused;
 
   std::string getWaveText();
 
   void initEntities();
   void initGUI();
+
+  void togglePause();
 
 public:
   GameState(sf::RenderWindow *window, std::stack<State *> *states);

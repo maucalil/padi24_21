@@ -26,6 +26,13 @@ void GameState::initGUI()
   waveInfo.setOrigin(waveInfoBounds.left + waveInfoBounds.width / 2, waveInfoBounds.top + waveInfoBounds.height / 2);
 
   waveInfo.setPosition(window->getView().getSize().x / 2.f, 30.f);
+
+  pauseMenu = new PauseMenu(window->getView().getSize(), window->getView().getSize() / 2.f);
+}
+
+void GameState::togglePause()
+{
+  paused = !paused;
 }
 
 GameState::GameState(sf::RenderWindow *window, std::stack<State *> *states)
@@ -167,7 +174,7 @@ void GameState::handleEvent(const sf::Event &event)
   case sf::Event::KeyReleased:
     if (event.key.code == sf::Keyboard::Escape)
     {
-      quit = true;
+      togglePause();
     }
     else if (event.key.code == sf::Keyboard::Num1)
     {
@@ -187,6 +194,13 @@ void GameState::handleEvent(const sf::Event &event)
     }
     else if (!enemySpawner->isSpawning() && event.key.code == sf::Keyboard::R) {
       enemySpawner->startSpawning();
+    } else if (paused) {
+      pauseMenu->update(event.key.code);
+
+      if (pauseMenu->quit())
+        window->close();
+      else if (pauseMenu->resume())
+        paused = false;
     }
     break;
 
@@ -197,6 +211,9 @@ void GameState::handleEvent(const sf::Event &event)
 
 void GameState::update(const float dt)
 {
+  if (paused)
+    return;
+
   sf::Vector2f mousePos = sf::Vector2f(sf::Mouse::getPosition(*window));
 
   // Entities
@@ -253,4 +270,8 @@ void GameState::render(sf::RenderTarget &target)
   // GUI
   playerGUI->render(target);
   target.draw(waveInfo);
+
+  if (paused) {
+    pauseMenu->render(target);
+  }
 }
