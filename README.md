@@ -14,6 +14,10 @@ The goal of the game is to survive for as long as possible against increasing wa
 - Eternal Conflict Arena
 - Assault Arena
 
+## Final title
+
+- Survivor Arena
+
 ## Components
 
 - Single player

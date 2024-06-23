@@ -48,7 +48,7 @@ void MainMenuState::initGUI()
 
   title.setFont(*ResourceManager::getFont("fonts/arial.ttf"));
   title.setCharacterSize(60);
-  title.setString("Name In Progress");
+  title.setString("Survivor Arena");
 
   sf::FloatRect titleBounds = title.getGlobalBounds();
   title.setOrigin(titleBounds.left + titleBounds.width / 2, titleBounds.top + titleBounds.height / 2);
