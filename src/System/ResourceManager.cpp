@@ -43,3 +43,20 @@ sf::Font *ResourceManager::getFont(std::string fontName)
 
   return &font;
 }
+
+sf::SoundBuffer *ResourceManager::getSoundBuffer(std::string soundName)
+{
+  auto &soundMap = Instance().sounds;
+  auto pairFound = soundMap.find(soundName);
+
+  if (pairFound != soundMap.end())
+  {
+    return &pairFound->second;
+  }
+
+  auto &soundBuffer = soundMap[soundName];
+  std::string filename = std::string("../resources/") + soundName;
+  soundBuffer.loadFromFile(filename);
+
+  return &soundBuffer;
+}

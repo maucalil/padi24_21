@@ -25,6 +25,8 @@ private:
   
   float attackSpeed;
   sf::Clock attackTimer;
+
+  sf::Sound growlSound;
   
   void initVariables();
   void initAnimations();

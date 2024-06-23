@@ -2,6 +2,7 @@
 #define RESOURCE_MANAGER
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <map>
 
 class ResourceManager
@@ -20,12 +21,14 @@ private:
 
   std::map<std::string, sf::Texture> textures;
   std::map<std::string, sf::Font> fonts;
+  std::map<std::string, sf::SoundBuffer> sounds;
 
   ResourceManager();
 
 public:
   static sf::Texture* getTexture(std::string texName);
   static sf::Font* getFont(std::string fontName);
+  static sf::SoundBuffer* getSoundBuffer(std::string soundName);
 };
 
 #endif

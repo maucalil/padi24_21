@@ -28,10 +28,13 @@ private:
   PauseMenu* pauseMenu;
   bool paused;
 
+  sf::Sound backgroundSound;
+
   std::string getWaveText();
 
   void initEntities();
   void initGUI();
+  void initSounds();
 
   void togglePause();
 

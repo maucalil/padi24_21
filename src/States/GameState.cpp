@@ -30,6 +30,14 @@ void GameState::initGUI()
   pauseMenu = new PauseMenu(window->getView().getSize(), window->getView().getSize() / 2.f);
 }
 
+void GameState::initSounds()
+{
+  backgroundSound.setBuffer(*ResourceManager::getSoundBuffer("sounds/wind.ogg"));
+  backgroundSound.setVolume(30);
+  backgroundSound.setLoop(true);
+  backgroundSound.play();
+}
+
 void GameState::togglePause()
 {
   paused = !paused;
@@ -68,6 +76,7 @@ GameState::GameState(sf::RenderWindow *window, std::stack<State *> *states)
 
   initEntities();
   initGUI();
+  initSounds();
 }
 
 GameState::~GameState()
@@ -87,6 +96,8 @@ GameState::~GameState()
   }
 
   delete playerGUI;
+
+  backgroundSound.stop();
 }
 
 bool GameState::checkWindowCollision(const sf::Sprite &sprite)
@@ -257,6 +268,9 @@ void GameState::update(const float dt)
   // GUI
   playerGUI->update(dt);
   waveInfo.setString(getWaveText());
+
+  if (states->top() != this)
+    this->~GameState();
 }
 
 void GameState::render(sf::RenderTarget &target)

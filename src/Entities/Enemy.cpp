@@ -63,10 +63,16 @@ Enemy::Enemy(sf::Vector2f pos, int waveLevel)
   health = maxHealth;
   damage += static_cast<int>(Constants::DefaultEnemyDamage * (waveLevel - 1) * 0.05);
   exp += static_cast<int>(Constants::DefaultEnemyExp * pow((waveLevel - 1), 1.1));
+
+  growlSound.setBuffer(*ResourceManager::getSoundBuffer("sounds/zombie.ogg"));
+  growlSound.setVolume(25);
+  growlSound.setLoop(true);
+  growlSound.play();
 }
 
 Enemy::~Enemy()
 {
+  growlSound.stop();
 }
 
 void Enemy::handleBulletHit(const int &damage)

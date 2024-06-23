@@ -4,6 +4,7 @@ void Player::initVariables()
 {
   damage = Constants::DefaultPlayerDamage;
   fireRate = Constants::DefaultPlayerFireRate;
+  fireRate = .1f;
   atkSpeed = 1.f / fireRate;
   health = Constants::DefaultPlayerHealth;
   maxHealth = Constants::DefaultPlayerHealth;
@@ -17,6 +18,9 @@ void Player::initVariables()
 
   isShooting = false;
   playerState = IDLE;
+
+  shootSound.setBuffer(*ResourceManager::getSoundBuffer("sounds/shoot.wav"));
+  shootSound.setVolume(15);
 }
 
 void Player::initAnimations()
@@ -66,6 +70,7 @@ Player::Player(sf::Vector2f pos)
 
 Player::~Player()
 {
+  shootSound.stop();
 }
 
 int Player::getDamage()
@@ -211,6 +216,7 @@ void Player::updateBullet(const float dt, std::vector<Bullet *> &bullets)
   if (isShooting && fireRateTimer >= fireRate)
   {
     bullets.push_back(new Bullet(getWeaponPos(), lookingDirection));
+    shootSound.play();
 
     fireRateTimer = 0;
   }

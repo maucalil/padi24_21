@@ -32,6 +32,7 @@ private:
   int levelUpPoints;
 
   sf::Vector2f lookingDirection;
+  sf::Sound shootSound;
 
   void initVariables();
   void initAnimations();

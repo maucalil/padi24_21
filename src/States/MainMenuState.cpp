@@ -63,8 +63,7 @@ void MainMenuState::initGUI()
 
 void MainMenuState::initSounds()
 {
-  // Load a music to play
-  backgroundMusic.openFromFile("../resources/sounds/main_menu_background.ogg");
+  backgroundMusic.setBuffer(*ResourceManager::getSoundBuffer("sounds/main_menu_background.ogg"));
 
   // Play the backgroundMusic
   backgroundMusic.play();
@@ -115,7 +114,7 @@ void MainMenuState::handleEvent(const sf::Event &event)
       if (optionIndex == Play)
       {
         changeState(new GameState(window, states));
-        backgroundMusic.~Music();
+        backgroundMusic.~Sound();
       }
       else if (optionIndex == Exit)
       {

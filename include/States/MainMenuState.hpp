@@ -18,7 +18,7 @@ private:
   std::size_t optionIndex;
 
   sf::Sprite background;
-  sf::Music backgroundMusic;
+  sf::Sound backgroundMusic;
 
   void addOption(std::string optionName);
   void updateOptionText();
