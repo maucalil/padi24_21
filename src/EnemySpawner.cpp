@@ -57,7 +57,7 @@ void EnemySpawner::update(const float dt, std::vector<Enemy *> &enemies, sf::Vec
     timer = 0;
   } else if (numEnemiesSpawned == waveNumEnemies && enemies.size() == 0) {
     wave++;
-    waveNumEnemies += 5;
+    waveNumEnemies = ceil(waveNumEnemies * 1.06);
     remainingEnemies = waveNumEnemies;
     numEnemiesSpawned = 0;
     canSpawn = false;

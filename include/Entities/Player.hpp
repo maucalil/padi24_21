@@ -23,6 +23,7 @@ private:
 
   float fireRate;
   float fireRateTimer; // how much time has passed since the last shoot
+  float atkSpeed;
   int damage;
 
   int experience;

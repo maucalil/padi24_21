@@ -4,6 +4,7 @@ void Player::initVariables()
 {
   damage = Constants::DefaultPlayerDamage;
   fireRate = Constants::DefaultPlayerFireRate;
+  atkSpeed = 1.f / fireRate;
   health = Constants::DefaultPlayerHealth;
   maxHealth = Constants::DefaultPlayerHealth;
   expNextLevel = Constants::DefaultPlayerExpNextLvl;
@@ -88,8 +89,7 @@ std::vector<std::string> Player::getAttributesMap()
   attributesMap.push_back("Level: " + std::to_string(level));
   attributesMap.push_back("Points: " + std::to_string(levelUpPoints));
   attributesMap.push_back("Damage: " + std::to_string(damage));
-  attributesMap.push_back("Atk. Speed: " + std::to_string(fireRate));
-  attributesMap.push_back("Mov. Speed: " + std::to_string(movSpeed));
+  attributesMap.push_back("Atk. Speed: " + Utils::to_string_with_precision(atkSpeed));
 
   return attributesMap;
 }
@@ -124,15 +124,20 @@ void Player::increaseAttribute(Constants::AttributeType attributeType)
   switch (attributeType)
   {
   case Constants::AttributeType::DAMAGE:
-    damage += static_cast<int>(damage * 0.1);
+    damage += static_cast<int>(damage * 0.05);
     break;
 
   case Constants::AttributeType::ATK_SPEED:
     fireRate *= 0.98f; // decreases by 2%
+    atkSpeed = 1.f / fireRate;
+    if (fireRate < 0.1f) {
+      fireRate = 0.1f;
+      atkSpeed = 10.f;
+    }
     break;
 
   case Constants::AttributeType::HEALTH:
-    maxHealth += static_cast<int>(health * 0.1);
+    maxHealth += static_cast<int>(health * 0.07);
     health = maxHealth;
     break;
 
@@ -140,6 +145,8 @@ void Player::increaseAttribute(Constants::AttributeType attributeType)
     return;
   }
 
+  if (attributeType == Constants::AttributeType::ATK_SPEED && fireRate == 0.1f)
+    return;
   levelUpPoints--;
 }
 

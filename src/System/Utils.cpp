@@ -21,3 +21,9 @@ float Utils::GetAngle(sf::Vector2f dir)
 {
   return atan2f(dir.y, dir.x) * 180 / M_PI;
 }
+
+std::string Utils::to_string_with_precision(float value, int precision) {
+    std::ostringstream out;
+    out << std::fixed << std::setprecision(precision) << value;
+    return out.str();
+}

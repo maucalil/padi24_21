@@ -14,22 +14,15 @@ public:
     HEALTH = 2,
     MOV_SPEED = 3,
   };
-
-  enum AttributeMax
-  {
-    DAMAGE_MAX = 250,
-    ATK_SPEED_MAX = 0,
-    HEALTH_MAX = 1000,
-    MOV_SPEED_MAX = 500,
-  };
+  static constexpr float MaxFireRate = 0.1f;
 
   // Bullet
   static constexpr float DefaultBulletSpeed = 500.f;
 
   // Player
-  static constexpr int DefaultPlayerDamage = 15;
-  static constexpr float DefaultPlayerFireRate = 0.75f; // seconds - 2 attacks per second
-  static constexpr int DefaultPlayerHealth = 100;
+  static constexpr int DefaultPlayerDamage = 20;
+  static constexpr float DefaultPlayerFireRate = 0.5f; // seconds - 2 attacks per second
+  static constexpr int DefaultPlayerHealth = 140;
   static constexpr int DefaultPlayerExpNextLvl = 20;
   static constexpr float DefaultPlayerMovSpeed = 150.f;
 
@@ -55,8 +48,8 @@ public:
   static constexpr float PlayerShootTimePerFrame = .15f;
 
   // Enemy
-  static constexpr int DefaultEnemyDamage = 10;
-  static constexpr int DefaultEnemyHealth = 30;
+  static constexpr int DefaultEnemyDamage = 20;
+  static constexpr int DefaultEnemyHealth = 40;
   static constexpr int DefaultEnemyExp = 7;
   static constexpr float DefaultEnemyMovSpeed = 100.f;
   static constexpr float DefaultEnemyAttackSpeed = 1.f; // 1 attack per second
@@ -76,7 +69,7 @@ public:
   static constexpr float EnemyAttackTimePerFrame = .12f;
 
   // Wave
-  static constexpr int DefaultWaveNumEnemies = 15;
+  static constexpr int DefaultWaveNumEnemies = 10;
 
   static sf::Vector2f GetEnemySpawnPosition(int number);
 

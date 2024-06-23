@@ -59,7 +59,7 @@ Enemy::Enemy(sf::Vector2f pos, int waveLevel)
   sprite.setPosition(pos);
   sprite.scale(sf::Vector2f(.3f, .3f));
 
-  maxHealth += static_cast<int>(Constants::DefaultEnemyHealth * (waveLevel - 1) * 0.08);
+  maxHealth += static_cast<int>(Constants::DefaultEnemyHealth * (waveLevel - 1) * 0.03);
   health = maxHealth;
   damage += static_cast<int>(Constants::DefaultEnemyDamage * (waveLevel - 1) * 0.05);
   exp += static_cast<int>(Constants::DefaultEnemyExp * pow((waveLevel - 1), 1.1));
