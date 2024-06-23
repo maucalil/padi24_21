@@ -13,7 +13,7 @@ void Player::initVariables()
   experience = 0;
   fireRateTimer = 0;
   level = 1;
-  levelUpPoints = 100;
+  levelUpPoints = 0;
 
   isShooting = false;
   playerState = IDLE;

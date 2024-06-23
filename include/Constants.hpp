@@ -137,6 +137,7 @@ public:
     Beach_B_Grass_4,
     Beach_B_Grass_5,
     Water,
+    Road_Up_D,
     Null_1,
     Beach_T_5,
     Beach_R_6,
@@ -144,6 +145,17 @@ public:
     Beach_TL_3,
     Beach_B_4,
     Beach_B_5,
+    Road_Up,
+    Road_Up_DT,
+    Road_Horizontal_D,
+    Road_Horizontal_DL,
+    Road_Horizontal_DR,
+    Road_Horizontal,
+    Dirt_L,
+    Dirt_R,
+    Dirt_T,
+    Road_Up_DB,
+    Dirt_B,
   };
 };
 

@@ -1,9 +1,11 @@
 #include "World/Tile.hpp"
 
 Tile::Tile(int tileNumber, sf::Vector2u mapPos, sf::Vector2u tilesheetPos, sf::Vertex *quad)
-  : tileNumber(tileNumber)
+    : tileNumber(tileNumber)
 {
-  if (tileNumber == Constants::TileNumber::Sand || tileNumber == Constants::TileNumber::Grass)
+  if (tileNumber == Constants::TileNumber::Sand || tileNumber == Constants::TileNumber::Grass 
+      || tileNumber == Constants::TileNumber::Road_Up_D || tileNumber == Constants::TileNumber::Road_Up_DB 
+      || (tileNumber >= Constants::TileNumber::Road_Up && tileNumber <= Constants::TileNumber::Road_Horizontal))
     tileType = WALKABLE;
   else
     tileType = COLLIDABLE;
