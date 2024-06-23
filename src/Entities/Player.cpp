@@ -4,7 +4,6 @@ void Player::initVariables()
 {
   damage = Constants::DefaultPlayerDamage;
   fireRate = Constants::DefaultPlayerFireRate;
-  fireRate = .1f;
   atkSpeed = 1.f / fireRate;
   health = Constants::DefaultPlayerHealth;
   maxHealth = Constants::DefaultPlayerHealth;
