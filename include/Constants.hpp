@@ -38,7 +38,7 @@ public:
   static constexpr unsigned PlayerMoveFrameWidth = 313;
   static constexpr unsigned PlayerMoveFrameHeight = 206;
   static constexpr unsigned PlayerMoveNumFrames = 20;
-  static constexpr float PlayerMoveTimePerFrame = .1f;
+  static constexpr float PlayerMoveTimePerFrame = .05f;
 
   static constexpr unsigned PlayerShootTextureWidth = 936;
   static constexpr unsigned PlayerShootTextureHeight = 206;
