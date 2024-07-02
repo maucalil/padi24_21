@@ -221,6 +221,9 @@ void GameState::handleEvent(const sf::Event &event)
         window->close();
       else if (pauseMenu->resume())
         paused = false;
+    } else if (event.key.code == sf::Keyboard::F) {
+      int totalExp = enemySpawner->goToWave(40);
+      player->earnExp(totalExp);
     }
     break;
 

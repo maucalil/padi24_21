@@ -54,7 +54,7 @@ void Player::levelUp()
   level++;
   levelUpPoints++;
   experience -= expNextLevel;
-  expNextLevel = static_cast<int>(Constants::DefaultPlayerExpNextLvl * pow(level, 1.15));
+  expNextLevel = static_cast<int>(Constants::DefaultPlayerExpNextLvl * pow(level, 1.35));
 }
 
 Player::Player(sf::Vector2f pos)
@@ -116,7 +116,7 @@ sf::Vector2f Player::getWeaponPos()
 void Player::earnExp(const int &exp)
 {
   experience += exp;
-  if (experience >= expNextLevel)
+  while (experience >= expNextLevel)
     levelUp();
 }
 

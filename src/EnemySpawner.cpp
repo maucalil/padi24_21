@@ -46,6 +46,23 @@ void EnemySpawner::handleEnemyKilled()
   remainingEnemies--;
 }
 
+int EnemySpawner::goToWave(int waveNum)
+{
+  int counter = 0;
+
+  while (wave != waveNum) {
+    Enemy enemy = Enemy(sf::Vector2f(0, 0), wave);
+    counter += enemy.getExp() * waveNumEnemies;
+    waveNumEnemies = ceil(waveNumEnemies * 1.06);
+    wave++;
+  }
+
+  remainingEnemies = waveNumEnemies;
+  numEnemiesSpawned = 0;
+  canSpawn = false;
+  return counter;
+}
+
 void EnemySpawner::update(const float dt, std::vector<Enemy *> &enemies, sf::Vector2f pos)
 {
   timer += dt;

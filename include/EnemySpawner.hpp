@@ -31,6 +31,8 @@ public:
   void startSpawning();
   void handleEnemyKilled();
 
+  int goToWave(int waveNum);
+
   void update(const float dt, std::vector<Enemy *> &enemies, sf::Vector2f pos);
 };
 
