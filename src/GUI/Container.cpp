@@ -4,7 +4,7 @@ Container::Container()
 {
   sf::VideoMode vm = sf::VideoMode::getDesktopMode();
   size = sf::Vector2f(400.f, 95.f);
-  position = sf::Vector2f(vm.width / 2, vm.height - size.y / 2);
+  position = sf::Vector2f(vm.width / 2, vm.height - size.y / 2 - 35.f);
 
   container.setFillColor(sf::Color(50, 50, 50, 200));
   container.setSize(size);

@@ -9,8 +9,8 @@ void Game::initVariables()
 void Game::initWindow()
 {
   windowSettings.antialiasingLevel = 8;
-  // window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "SFML Window", sf::Style::Close | sf::Style::Titlebar, windowSettings);
-  window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "SFML Window", sf::Style::Fullscreen, windowSettings);
+  window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Survivor Arena", sf::Style::Close | sf::Style::Titlebar, windowSettings);
+  // window = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "Survivor Arena", sf::Style::Fullscreen, windowSettings);
   window->setFramerateLimit(60);
 }
 
